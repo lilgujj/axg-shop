@@ -2,7 +2,7 @@ import { Component, CSSProperties} from "react";
 import "../css/main.css";
 import "../css/layout.css"
 import mainMan from "../images/mainMan.jpg"
-import { AutoComplete, Carousel } from 'antd';
+import { Carousel } from 'antd';
 
 class Main extends Component {
 
