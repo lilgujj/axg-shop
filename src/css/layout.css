@@ -23,3 +23,23 @@
 .column {
     flex-direction: column;
 }
+
+.p1 {
+    padding: 1rem;
+}
+
+.p2 {
+    padding: 2rem;
+}
+
+.p3 {
+    padding: 3rem;
+}
+
+.p4 {
+    padding: 4rem;
+}
+
+.p5 {
+    padding: 5rem;
+}

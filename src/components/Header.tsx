@@ -20,15 +20,15 @@ class Header extends Component<Props> {
                     </Link>
 
                 <div>
-                    <Link className="linkStyle"to='/shop'>
+                    <Link className="linkStyle links"to='/shop'>
                         Shop
                     </Link>
                     
-                    <Link className="linkStyle"to='/shop'>
+                    <Link className="linkStyle links"to='/shop'>
                         About
                     </Link>
                     
-                    <Link className="linkStyle"to='/shop'>
+                    <Link className="linkStyle links"to='/shop'>
                         Contact
                     </Link>
                     

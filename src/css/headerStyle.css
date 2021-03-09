@@ -14,6 +14,10 @@ nav {
     padding: 0 .5rem;
 }
 
+.links {
+    font-size: 1.2rem;
+}
+
 .nav-div {
     width: 80%;
     height: 5rem;

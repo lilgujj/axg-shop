@@ -1,6 +1,7 @@
 import { Component, CSSProperties } from "react";
 import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
+import { InputNumber } from 'antd';
 
 interface Props {
     isOpen: boolean;
@@ -17,8 +18,11 @@ class ShoppingCartSidebar extends Component<Props> {
                     
             >
             <div style={arrowDivStyle}>
+                <div>
+                    <ArrowRightOutlined style={{ fontSize: '2rem' }} onClick={this.props.onSidebarClose}/>
 
-                <ArrowRightOutlined style={{ fontSize: '2rem' }} onClick={this.props.onSidebarClose}/>
+                </div>
+
                 <Button>Check Out</Button>
             </div>
 
@@ -47,7 +51,8 @@ const arrowDivStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '80%'
+    height: '100%',
+    margin: '1rem 0'
 }
 
 export default ShoppingCartSidebar;

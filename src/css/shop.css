@@ -1,5 +1,7 @@
 .shopContainer {
-    margin-top: 28rem;
+    width: 100%;
+    flex-wrap: wrap;
+
 }
 
 .imageBack {
@@ -15,4 +17,10 @@
 .shopItems {
     margin-bottom: 2rem;
     flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.produktImage {
+    width: 20rem;
+    border-radius: 1rem;
 }

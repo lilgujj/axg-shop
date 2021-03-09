@@ -7,7 +7,7 @@ const { Meta } = Card;
 
 interface Props {
     title: string,
-    description: string,
+    description: number,
     img: string
 }
 
