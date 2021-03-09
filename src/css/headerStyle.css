@@ -5,6 +5,13 @@ nav {
     top: 0;
     left: 0;
     right: 0;
+    color: white;
+}
+
+.linkStyle {
+    text-decoration: none;
+    color: white;
+    padding: 0 .5rem;
 }
 
 .nav-div {
@@ -12,8 +19,10 @@ nav {
     height: 5rem;
 }
 
-h1 {
+#h1 {
     margin-bottom: 0;
+    color: white;
+   
 }
 
 h1 .span {

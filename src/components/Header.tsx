@@ -4,27 +4,31 @@ import '../css/layout.css';
 import { ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import {Link } from "react-router-dom";
 
-class Header extends Component {
+
+interface Props {
+    handleClick: () => void;
+}
+class Header extends Component<Props> {
     
     render() {
         return(
 
             <nav className="flex centerX centerY">
                 <div className="flex space-between centerY nav-div">
-                    <Link to="/">
-                        <h1>A <span>X</span> G</h1>
+                    <Link className="linkStyle" to="/">
+                        <h1 id="h1">A <span>X</span> G</h1>
                     </Link>
 
                 <div>
-                    <Link to='/shop'>
+                    <Link className="linkStyle"to='/shop'>
                         Shop
                     </Link>
                     
-                    <Link to='/shop'>
+                    <Link className="linkStyle"to='/shop'>
                         About
                     </Link>
                     
-                    <Link to='/shop'>
+                    <Link className="linkStyle"to='/shop'>
                         Contact
                     </Link>
                     
@@ -32,7 +36,7 @@ class Header extends Component {
                 </div>
 
                     <div>
-                        <ShoppingCartOutlined style={{fontSize: '2rem', marginRight: '.5rem'}}/>
+                        <ShoppingCartOutlined style={{fontSize: '2rem', marginRight: '.5rem'}} onClick={this.props.handleClick}/>
                         <UserOutlined style={{fontSize: '2rem'}}/>
 
                     </div>
