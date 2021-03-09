@@ -1,10 +1,11 @@
-import {Button} from "antd"
+import React from "react";
+import Layout from "./components/Layout";
 import "./index.css"
 
 function App() {
   return (
-    <div className="App">
-      <Button type="ghost">Click me</Button>
+    <div>
+      <Layout  />
     </div>
   );
 }

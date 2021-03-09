@@ -1,0 +1,28 @@
+
+
+.imageBg {
+    position: absolute;
+    z-index: -100;
+    height: 40rem;
+    width: 100%;
+    object-fit: cover;
+    top: 0;
+
+}
+
+.axgTitle {
+    margin-top: 15rem;
+}
+
+.newsContainer {
+    margin-top: 16.4rem;
+    margin-bottom: 5rem;
+    width: 100%;
+
+}
+
+.newReleases {
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
