@@ -1,31 +1,36 @@
 import { Button } from "antd"
 import { Component } from "react"
-import { Link } from "react-router-dom"
+import { Link, RouteComponentProps, withRouter } from "react-router-dom"
+import { Product } from "../context/DatabaseContext"
 
 import "../css/layout.css"
 import "../css/shop.css"
 
 
-interface Props {
-    productName: String,
-    price: Number,
-    id: Number,
-    img: any,
-    description: String,
+
+interface Props extends RouteComponentProps<{ id: string }> {
+    allProducts: Product[]
 }
 
 class ProductItem extends Component<Props> {
 
     render(){
+        const product = this.props.allProducts.find((p) =>
+            p.productName == this.props.match.params.id)
+
+        if (!product) {
+            return "Tyvärr har du besökt en produkt som inte finns."
+        }
+
         return  (
             <div className="shopItems flex centerY centerX">
                 <div>
-                    <img className={"produktImage"} src={this.props.img} alt=""/>
+                    <img className={"produktImage"} src={product?.img} alt=""/>
                 </div>
                 <div className="flex-col p2">
-                        <p>{this.props.productName}</p>
-                        <p>{this.props.description}</p>
-                        <p>{this.props.price}kr</p>
+                        <p>{product?.productName}</p>
+                        <p>{product?.description}</p>
+                        <p>{product?.price}kr</p>
                     <div>
                         <Button style={{margin: ".5rem"}}>Buy Now</Button>
                         <Link to="/shop">
@@ -38,4 +43,4 @@ class ProductItem extends Component<Props> {
     }
 }
 
-export default ProductItem
+export default withRouter(ProductItem);
