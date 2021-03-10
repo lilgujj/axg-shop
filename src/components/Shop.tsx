@@ -13,6 +13,7 @@ import klocka1 from "../images/klocka1.jpg";
 import klocka2 from "../images/klocka2.jpg";
 import { Link, Route, Switch, useRouteMatch } from "react-router-dom";
 import { Button } from "antd";
+import ProductItem from "./ProductItem";
 
 
 function Shop() {
@@ -22,37 +23,43 @@ function Shop() {
            productName: 'Green Goblin Glasses',
            price: 399,
            id: 1,
-           img: sunglass1
+           img: sunglass1,
+           description: "Green handmade glasses from Sweden. Dark green opacity makes u feel one with nature"
        },
        {
            productName: 'Pink Lady Glasses',
            price: 299,
            id: 2,
-           img: sunglass3
+           img: sunglass3,
+           description: "Pink handmade glasses from Sweden. Soft pink opacity put your eyes in comfort zone"
        },
        {
            productName: 'LA Snapback',
            price: 299,
            id: 3,
-           img: keps1
+           img: keps1,
+           description: "LA Snapback. unisex and all fit"
        },
        {
            productName: 'Nike Snapback',
            price: 299,
            id: 4,
-           img: keps2
+           img: keps2,
+           description: "Nike Snapback. unisex and all fit"
        },
        {
            productName: 'Edifice',
            price: 1299,
            id: 5,
-           img: klocka1
+           img: klocka1,
+           description: "Edifice watch water resistant 100m with rose/black design"
        },
        {
            productName: 'Maurice De Mauriac',
            price: 1899,
            id: 6,
-           img: klocka2
+           img: klocka2,
+           description: "Maurice De Mauriac watch with date and timer functions to keep you updated."
        },
 
    ]
@@ -63,7 +70,6 @@ function Shop() {
             <>
             <img className="imageBack" src={shopImg} alt=""/>
             <h1 style={{ textAlign: 'center', marginTop: '30rem' }}>Shop</h1>
-            {/* <div className="shopContainer flex-col centerY centerX"> */}
                 <Switch>
                     <Route exact path="/shop">
                         <div className="shopContainer flex centerY centerX">
@@ -78,48 +84,20 @@ function Shop() {
                         }
                         </div>
                     </Route>
-                    <Route path={`${path}/${database[0].productName}`}>
-                        <div className="shopItems flex centerY centerX">
-                            <div>
-                                <img className="produktImage" src={sunglass1} alt=""/>
-                            </div>
-                            <div className="flex-col p2">
-                                    <p>Green Gob Glasses</p>
-                                    <p>Embrace the sun with these rounded handmade sunglasses with green theme</p>
-                                    <p>Price: 399kr</p>
-                                <div>
-                                    <Button style={{margin: ".5rem"}}>Buy Now</Button>
-                                    <Link to="/shop">
-                                        <Button style={{margin: ".5rem"}}>Go back</Button>
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </Route>
-                    <Route path={`${path}/${database[1].productName}`}>
-                        <div className="shopItems flex centerY centerX">
-                            <div>
-                                <img className="produktImage" src={sunglass1} alt=""/>
-                            </div>
-                            <div className="flex-col p2">
-                                    <p>{database[1].productName}</p>
-                                    <p>Embrace the sun with these rounded handmade sunglasses with green theme</p>
-                                    <p>Price: 399kr</p>
-                                <div>
-                                    <Button style={{margin: ".5rem"}}>Buy Now</Button>
-                                    <Link to="/shop">
-                                        <Button style={{margin: ".5rem"}}>Go back</Button>
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </Route>
+                    <div className="shopContainer flex centerY centerX">
+                        {
+                            database.map((item, i) => (
+                                <Route path={`${path}/${database[i].productName}`}>
+                                    <ProductItem productName={item.productName} price={item.price} id={item.id} img={item.img} description={item.description} />
+                                </Route>
+
+                            ))
+                        }
+                    </div>
                 </Switch>
-            {/* </div> */}
             </>
         )
     
 }
-
 
 export default Shop;
