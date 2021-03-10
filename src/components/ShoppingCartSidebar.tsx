@@ -34,7 +34,7 @@ class ShoppingCartSidebar extends Component<Props> {
 const sidebarStyle = (props: Props): CSSProperties => ({
     position: 'fixed',
     top: 0,
-    width: props.isOpen ? '30rem' : 0,
+    width: props.isOpen ? '50%' : 0,
     right: 0,
     height: '100%',
     overflow: 'hidden',

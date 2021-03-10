@@ -13,15 +13,18 @@ class Main extends Component {
         return (
             <>
                 <img className="imageBg" src={mainMan} alt="" />
-                <h1 className="flex centerX centerY axgTitle">
-                    aXg Cloting Brand
-                </h1>
+
+                <div className="flex centerX centerY column axgTitle">
+                    <h1 className="flex centerY h1Main">A <span className="mainXLogo">X</span> G</h1>
+                    <p>Clothing shop</p>
+
+                </div>
 
                 <div className="newsContainer">
                     <div className="newReleases">
                         <h2>New releases</h2>
                     </div>
-                <Carousel autoplay>
+                <Carousel autoplay style={{zIndex: 100}} >
                     <div>
                         <h3 style={contentStyle}>1</h3>
                     </div>

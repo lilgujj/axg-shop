@@ -16,6 +16,7 @@ class ProductCard extends Component <Props> {
     return (
       <div>
         <Card
+          id="zIndex"
           hoverable
           style={{ width: 240, margin: ".5rem", borderRadius: "1rem" }}
           cover={
