@@ -9,6 +9,7 @@ import klocka2 from "../images/klocka2.jpg";
 
 export const DataContext = createContext<ContextValue>({
     addToCart: () => {},
+    removeProduct: () => {},
     cart:[],
     products: []
 
@@ -16,6 +17,7 @@ export const DataContext = createContext<ContextValue>({
     
 interface ContextValue extends State {
     addToCart: (id: any) => void;
+    removeProduct: (id: any) => void;
 }
 
 
@@ -110,7 +112,22 @@ class DataProvider extends Component<{}, State> {
         }
 
      }
-    
+
+
+    removeProductfromCart = (id: any) => {
+
+        if(window.confirm("Do you wanna delete this product")) {
+            const { cart } = this.state;
+            cart.forEach((item, index) => {
+                if(item.productName === id) {
+                    cart.splice(index, 1)
+                } 
+            
+                })
+                this.setState({ cart: cart })
+
+        }
+    }
     
 
     
@@ -121,7 +138,8 @@ class DataProvider extends Component<{}, State> {
             <DataContext.Provider value={{
                 products: this.state.products,
                 cart: this.state.cart,
-                addToCart: this.addProductToCart
+                addToCart: this.addProductToCart,
+                removeProduct: this.removeProductfromCart
             }
             }>
                 {this.props.children}
