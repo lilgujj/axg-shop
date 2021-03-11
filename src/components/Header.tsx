@@ -4,7 +4,7 @@ import '../css/layout.css';
 import { BarsOutlined, CloseOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import {Link } from "react-router-dom";
 import { Badge } from 'antd';
-import { DataContext  } from "../context/DatabaseContext"
+import { CartContext  } from "../context/CartContext"
 
 
 interface Props {
@@ -33,7 +33,7 @@ class Header extends Component<Props, State> {
         
         return(
             
-            <DataContext.Consumer>
+            <CartContext.Consumer>
 
                 {({ cart }) => {
                     return(
@@ -84,7 +84,7 @@ class Header extends Component<Props, State> {
                         </nav>
                     )
                 }}
-            </DataContext.Consumer>
+            </CartContext.Consumer>
         )
     }
 }

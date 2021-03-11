@@ -1,25 +1,24 @@
 import { Button } from "antd"
 import { Component, ContextType, } from "react"
 import { Link, RouteComponentProps, withRouter } from "react-router-dom"
-import { DataContext, Product } from "../context/DatabaseContext"
+import { CartContext } from "../context/CartContext"
 
 import "../css/layout.css"
 import "../css/shop.css"
+import { Product, products } from "../products"
 
 
 
-interface Props extends RouteComponentProps<{ id: string }> {
-    allProducts: Product[]
-}
+interface Props extends RouteComponentProps<{ id: string }> {}
 
 class ProductItem extends Component<Props> {
-    context!: ContextType<typeof DataContext>
-    static contextType = DataContext;
+    context!: ContextType<typeof CartContext>
+    static contextType = CartContext;
 
 
     
     render(){
-        const product = this.props.allProducts.find((p) =>
+        const product = products.find((p) =>
             p.productName === this.props.match.params.id)
 
         if (!product) {

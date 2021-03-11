@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import Layout from "./components/Layout";
 import "./index.css"
 import { BrowserRouter  } from "react-router-dom";
-import DataProvider from "./context/DatabaseContext";
+import DataProvider from "./context/CartContext";
 
 function App() {
   return (

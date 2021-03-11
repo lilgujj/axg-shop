@@ -24,6 +24,8 @@ class Layout extends Component<{}, State> {
     }
 
     render() {
+
+        // console.log(this.state)
         return (
             <div className="flex-col">
                 <Header handleClick={this.toggleShoppingCart}/>

@@ -1,9 +1,9 @@
 import { Component, ContextType, CSSProperties } from "react";
 import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { DataContext, Product } from "../context/DatabaseContext";
+import { CartContext } from "../context/CartContext";
 import { RouteComponentProps } from "react-router-dom";
-import { InputNumber } from 'antd';
+import { InputNumber, Popconfirm, message } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 import '../css/cart.css';
@@ -17,8 +17,12 @@ interface Props {
 
 
 class ShoppingCartSidebar extends Component<Props> {
-    context!: ContextType<typeof DataContext>
-    static contextType = DataContext;
+    context!: ContextType<typeof CartContext>
+    static contextType = CartContext;
+
+    componentDidMount() {
+        
+    }
 
     render() {
            const { cart } = this.context
@@ -45,20 +49,39 @@ class ShoppingCartSidebar extends Component<Props> {
                                 <div/>   
                             </div>
                                 <div>
-                                    <InputNumber style={{width: "4rem"}} min={1} max={10} defaultValue={item.count} bordered={true} />
-                                    <CloseOutlined onClick={() => this.context.removeProduct(item.productName)}style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
+                                    <InputNumber style={{width: "4rem"}} onChange={this.context.updateValue} min={1} max={10} defaultValue={item.count} bordered={true} />
+
+
+
+                                    {/* <Popconfirm placement="top" title={text} onConfirm={() => this.context.removeProduct(item.productName)} okText="Yes" cancelText="No"> */}
+                                  
+                                        <CloseOutlined onClick={() => this.context.removeProduct(item.productName)}style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
+                                
+                                    {/* </Popconfirm> */}
+
                                 </div>
                         </div>
                 
                    ))
             }
-            </div>  
+            </div>
+            <div className="flex">
+                <h3 style={{paddingRight: '1rem'}}>Total: {this.context.total}kr</h3>
                 <Button>Check Out</Button>
+            </div>  
             </aside>
             </>
         );
     }
 }
+
+
+        <Button>Top</Button>
+
+
+const text = 'Are you sure to delete this task?';
+
+
 
 
 
