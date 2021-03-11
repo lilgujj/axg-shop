@@ -1,7 +1,6 @@
 import { Component, CSSProperties } from "react";
 import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
-import { InputNumber } from 'antd';
 
 interface Props {
     isOpen: boolean;

@@ -1,6 +1,4 @@
 import React, { Component, createContext } from 'react';
-
-import shopImg from "../images/shop-img.jpg";
 import sunglass1 from "../images/glasses1.jpg";
 import sunglass3 from "../images/glasses3.jpg";
 import keps1 from "../images/keps1.jpg";
@@ -9,7 +7,17 @@ import klocka1 from "../images/klocka1.jpg";
 import klocka2 from "../images/klocka2.jpg";
 
 
-export const DataContext = createContext({} as State);
+export const DataContext = createContext<ContextValue>({
+    addToCart: () => {},
+    cart:[],
+    products: []
+
+});
+    
+interface ContextValue extends State {
+    addToCart: (id: any) => void;
+}
+
 
 export interface Product {
     productName: string,
@@ -20,7 +28,9 @@ export interface Product {
 }
 
 interface State {
-    products: Product[]
+    products: Product[],
+    cart: any[],
+    
 }
 
 class DataProvider extends Component<{}, State> {
@@ -70,8 +80,21 @@ class DataProvider extends Component<{}, State> {
                 description: "Maurice De Mauriac watch with date and timer functions to keep you updated."
             },
      
-        ]
+        ],
          
+        cart: [],
+
+     }
+
+
+     addProductToCart = (id: any) => {
+        const { products, cart } = this.state;
+        const data = products.filter(product => {
+            return product.productName === id
+        })
+
+        this.setState({cart: [...cart,...data]})
+        console.log(this.state.cart)
      }
     
     
@@ -79,8 +102,14 @@ class DataProvider extends Component<{}, State> {
     
 
     render() {
+
         return (
-            <DataContext.Provider value={this.state}>
+            <DataContext.Provider value={{
+                products: this.state.products,
+                cart: this.state.cart,
+                addToCart: this.addProductToCart
+            }
+            }>
                 {this.props.children}
             </DataContext.Provider>
         )
