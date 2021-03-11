@@ -46,7 +46,7 @@ class ShoppingCartSidebar extends Component<Props> {
                             </div>
                                 <div>
                                     <InputNumber style={{width: "4rem"}} min={1} max={10} defaultValue={item.count} bordered={true} />
-                                    <CloseOutlined style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
+                                    <CloseOutlined onClick={() => this.context.removeProduct(item.productName)}style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
                                 </div>
                         </div>
                 
@@ -59,6 +59,8 @@ class ShoppingCartSidebar extends Component<Props> {
         );
     }
 }
+
+
 
 const sidebarStyle = (props: Props): CSSProperties => ({
     position: 'fixed',
