@@ -1,0 +1,17 @@
+
+
+.cartItems {
+    /* margin-bottom: 2rem; */
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 80%;
+}
+.cart-div {
+    width: 100%;
+}
+
+.cartItemImage {
+    height: 5rem;
+    border-radius: 1rem;
+    margin: .25rem .5rem;
+}

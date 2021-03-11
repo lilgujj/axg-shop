@@ -24,6 +24,14 @@
     flex-direction: column;
 }
 
+.space-around {
+    justify-content: space-around;
+}
+.space-evenly {
+    justify-content: space-evenly;
+}
+
+
 .p1 {
     padding: 1rem;
 }

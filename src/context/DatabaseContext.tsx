@@ -24,7 +24,8 @@ export interface Product {
     price: number,
     id: number,
     img: any,
-    description: string
+    description: string,
+    count: number
 }
 
 interface State {
@@ -42,42 +43,48 @@ class DataProvider extends Component<{}, State> {
                 price: 399,
                 id: 1,
                 img: sunglass1,
-                description: "Green handmade glasses from Sweden. Dark green opacity makes u feel one with nature"
+                description: "Green handmade glasses from Sweden. Dark green opacity makes u feel one with nature",
+                count: 1
             },
             {
                 productName: 'Pink Lady Glasses',
                 price: 299,
                 id: 2,
                 img: sunglass3,
-                description: "Pink handmade glasses from Sweden. Soft pink opacity put your eyes in comfort zone"
+                description: "Pink handmade glasses from Sweden. Soft pink opacity put your eyes in comfort zone",
+                count: 1
             },
             {
                 productName: 'LA Snapback',
                 price: 299,
                 id: 3,
                 img: keps1,
-                description: "LA Snapback. unisex and all fit"
+                description: "LA Snapback. unisex and all fit",
+                count: 1
             },
             {
                 productName: 'Nike Snapback',
                 price: 299,
                 id: 4,
                 img: keps2,
-                description: "Nike Snapback. unisex and all fit"
+                description: "Nike Snapback. unisex and all fit",
+                count: 1
             },
             {
                 productName: 'Edifice',
                 price: 1299,
                 id: 5,
                 img: klocka1,
-                description: "Edifice watch water resistant 100m with rose/black design"
+                description: "Edifice watch water resistant 100m with rose/black design",
+                count: 1
             },
             {
                 productName: 'Maurice De Mauriac',
                 price: 1899,
                 id: 6,
                 img: klocka2,
-                description: "Maurice De Mauriac watch with date and timer functions to keep you updated."
+                description: "Maurice De Mauriac watch with date and timer functions to keep you updated.",
+                count:  1
             },
      
         ],
@@ -89,12 +96,19 @@ class DataProvider extends Component<{}, State> {
 
      addProductToCart = (id: any) => {
         const { products, cart } = this.state;
-        const data = products.filter(product => {
-            return product.productName === id
+        const check = cart.every(item => {
+            return item.productName !== id
         })
+        
+        if(check) {
+                const data = products.filter(product => {
+                return product.productName === id
+            })
+            this.setState({cart: [...cart,...data]})
+        }else {
+            alert("the product has already been added to cart")
+        }
 
-        this.setState({cart: [...cart,...data]})
-        console.log(this.state.cart)
      }
     
     
