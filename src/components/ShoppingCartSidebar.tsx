@@ -59,21 +59,24 @@ class ShoppingCartSidebar extends Component<Props> {
                       marginLeft: ".5rem",
                     }}
                   />
-                  
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex centerX checkOut-div">
-            <h3 style={{ paddingRight: "1rem" }}>
-              Total: {this.context.total}kr
-            </h3>
-            <Button>Check Out</Button>
-          </div>
 
-      </>
-    );
-  }
+                        
+                   ))
+            }
+        
+        
+            </div>
+            <div className="flex centerX checkOut-div">
+                <h3 style={{paddingRight: '1rem'}}>Total: {this.context.total}kr</h3>
+                <Link to="/checkout">
+                    <Button>Check Out</Button>
+                </Link>
+            </div>  
+            </aside>
+            </>
+        );
+    }
+
 }
 
 

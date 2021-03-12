@@ -7,6 +7,7 @@ import { Footer } from "antd/lib/layout/layout";
 import { Route, Switch } from "react-router";
 import Shop from "./Shop";
 import ShoppingCartSidebar from './ShoppingCartSidebar'
+import CheckOut from "./checkOut";
 
 
 class Layout extends Component {
@@ -25,6 +26,12 @@ class Layout extends Component {
                     <Route path="/shop">
                         <Shop />
                     </Route>
+
+                    <Route path="/checkout">
+                        <CheckOut />
+                    </Route>
+
+
                 <Route path="/cart">
                 <ShoppingCartSidebar />
                 </Route>
