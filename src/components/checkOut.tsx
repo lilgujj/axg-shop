@@ -1,20 +1,25 @@
 import { Button, Form, Input, Radio, Select } from "antd";
 import { AntTreeNode, AntTreeNodeProps } from "antd/lib/tree";
-import React, { Component, useDebugValue } from "react";
+import React, { Component, ContextType, useDebugValue } from "react";
 import shopImg from "../images/shop-img.jpg";
 import "../css/layout.css"
 import "../css/checkOut.css"
+import { Link, Route, Switch } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 
 interface State {
     value: number
+    shippingValue: number
 }
 
 class CheckOut extends Component<{}, State> {
-
+    context!: ContextType<typeof CartContext>;
+    static contextType = CartContext;
 
     state = {
         value: 0,
+        shippingValue: 0,
     };
 
     onChange = (e: any) => {
@@ -22,6 +27,16 @@ class CheckOut extends Component<{}, State> {
         const value = e.target.value
         this.setState({
             value: value
+        });
+    };
+
+
+
+    changeShipping = (e: any) => {
+        console.log('radio checked', e.target.value);
+        const value1 = e.target.value
+        this.setState({
+            shippingValue: value1
         });
     };
 
@@ -37,6 +52,7 @@ class CheckOut extends Component<{}, State> {
             number: '${label} is not a valid number!',
         }
     };
+
 
         return(
             <>
@@ -77,6 +93,51 @@ class CheckOut extends Component<{}, State> {
                     </Form>
                  
                 </div>
+                <div className="formBorder">
+                    <Form className="flex-col centerY centerX" name="nest-messages" >
+                        <h3>Shipping</h3>
+                        <Radio.Group onChange={this.changeShipping} value={this.state.shippingValue}>
+                            <Link to='/checkOut/postnord'>
+                                <Radio value={1}>PostNord</Radio>
+                            </Link>
+
+                            <Link to='/checkOut/DHL'>
+                                <Radio value={2}>DHL</Radio>
+                            </Link>
+
+                            <Link to="/checkOut/schenker">
+                                <Radio value={3}>Schenker</Radio>
+                            </Link>
+                        </Radio.Group>
+                    </Form>
+
+                </div>
+                    <Switch>
+                        <Route path="/checkOut/postnord">
+                            <div>
+                                <h3>PostNord</h3>
+                                <p>Shipping price: 59kr</p>
+                                <p>{this.context.total}kr + 59kr</p>
+                                <h3 style={{ color: 'red' }}>Total: {this.context.total + 59}kr</h3>
+                            </div>      
+                        </Route>
+                        <Route path="/checkOut/DHL">
+                            <div>
+                                <h3>DHL</h3>
+                                <p>Shipping price: 79kr</p>
+                                <p>{this.context.total}kr + 79kr</p>
+                                <h3 style={{ color: 'red' }}>Total: {this.context.total + 79}kr</h3>
+                            </div>      
+                        </Route>
+                        <Route path="/checkOut/schenker">
+                            <div>
+                                <h3>Schenker</h3>
+                                <p>Shipping price: 109kr</p>
+                                <p>{this.context.total}kr + 109kr</p>
+                                <h3 style={{ color: 'red' }}>Total: {this.context.total + 109}kr</h3>
+                            </div>      
+                        </Route>
+                    </Switch>
 
                
             </div>
