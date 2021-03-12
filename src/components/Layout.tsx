@@ -10,26 +10,14 @@ import ShoppingCartSidebar from './ShoppingCartSidebar'
 import CheckOut from "./checkOut";
 
 
-interface State {
-    isSidebarOpen: boolean;
-  }
-class Layout extends Component<{}, State> {
-
-    state: State = {
-        isSidebarOpen: false
-    }
-
-
-    toggleShoppingCart = () => {
-        this.setState({ isSidebarOpen: !this.state.isSidebarOpen })
-    }
+class Layout extends Component {
 
     render() {
 
         // console.log(this.state)
         return (
             <div className="flex-col">
-                <Header handleClick={this.toggleShoppingCart}/>
+                <Header />
 
                 <Switch>
                     <Route exact path="/">
@@ -38,16 +26,15 @@ class Layout extends Component<{}, State> {
                     <Route path="/shop">
                         <Shop />
                     </Route>
-                    <Route path="/cart">
-                        <ShoppingCartSidebar 
-                            onSidebarClose={this.toggleShoppingCart}
-                            isOpen={this.state.isSidebarOpen}
-                            />
-                    </Route>
+
                     <Route path="/checkout">
                         <CheckOut />
                     </Route>
 
+
+                <Route path="/cart">
+                <ShoppingCartSidebar />
+                </Route>
                 </Switch>
                 <Footer style={{textAlign: "center"}}>
                     Anton X Gustav <br />clothing
