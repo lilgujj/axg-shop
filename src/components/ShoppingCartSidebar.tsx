@@ -23,14 +23,7 @@ class ShoppingCartSidebar extends Component<Props> {
     return (
       <>
         <img className="imageBack" src={shopImg} alt="" />
-        <h1
-          style={{
-            textAlign: "center",
-            marginTop: "10rem",
-            marginBottom: "10rem",
-            color: 'white',
-            fontSize: '5rem'
-          }}
+        <h1 className="cartH1"
         >
           Your order
         </h1>
@@ -47,7 +40,7 @@ class ShoppingCartSidebar extends Component<Props> {
                 </div>
                 </div>
 
-                <div className="flex centerY centerX">
+                <div className="flex centerY centerX count-div">
                   <Button
                     onClick={() => this.context.decrease(item.productName)}>
                     -
