@@ -37,13 +37,13 @@ class Layout extends Component<{}, State> {
                     <Route path="/shop">
                         <Shop />
                     </Route>
-                </Switch>
-
+                <Route path="/cart">
                 <ShoppingCartSidebar 
                     onSidebarClose={this.toggleShoppingCart}
                     isOpen={this.state.isSidebarOpen}
                     />
-                
+                </Route>
+                </Switch>
                 <Footer style={{textAlign: "center"}}>
                     Anton X Gustav <br />clothing
                 </Footer>

@@ -20,6 +20,10 @@
     align-items: center;
 }
 
+.centerText {
+    align-text: center;
+}
+
 .column {
     flex-direction: column;
 }

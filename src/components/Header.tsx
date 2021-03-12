@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, ContextType } from "react";
 import '../css/headerStyle.css';
 import '../css/layout.css';
 import { BarsOutlined, CloseOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
@@ -15,6 +15,8 @@ interface State {
     toggleNavbar: boolean
 }
 class Header extends Component<Props, State> {
+    context!: ContextType<typeof CartContext>
+    static contextType = CartContext;
 
     state: State = {
         toggleNavbar: false
@@ -74,9 +76,12 @@ class Header extends Component<Props, State> {
 
                                 <div className="flex">
                                     <div style={{ marginRight: '1rem' }}>
-                                        <Badge count={cart.length} showZero>
-                                            <ShoppingCartOutlined style={{fontSize: '2rem', color: 'white'}} onClick={this.props.handleClick}/>
-                                        </Badge>
+
+                                        <Link to='/cart'>
+                                            <Badge count={cart.length} showZero>
+                                                <ShoppingCartOutlined style={{fontSize: '2rem', color: 'white'}} onClick={this.props.handleClick}/>
+                                            </Badge>
+                                        </Link>
                                     </div>
                                     <UserOutlined style={{fontSize: '2rem'}}/>
                                 </div>

@@ -5,7 +5,9 @@ import { Product, products } from '../products';
 export const CartContext = createContext<ContextValue>({
     addToCart: () => {},
     removeProduct: () => {},
-    updateValue: () => {},
+    decrease: () => {},
+    increase: () => {},
+    getTotal: () => {},
     cart:[],
     total: 0,
 });
@@ -16,13 +18,15 @@ interface CartProduct extends Product {
 
 interface State {
     cart: CartProduct[],
-    total: number
+    total: any
 }
 
 interface ContextValue extends State {
     addToCart: (id: any) => void;
     removeProduct: (id: any) => void;
-    updateValue: (value: number) => void;
+    decrease: (id: string) => void;
+    increase: (id: string) => void;
+    getTotal: () => void;
 }
 
 class DataProvider extends Component<{}, State> {
@@ -65,36 +69,58 @@ class DataProvider extends Component<{}, State> {
             
                 })
                 this.setState({ cart: cart })
-
+                this.getTotalPrice()
         // }
     }
     
-    updateValueCount = (value: number)  => {
-        const { cart,total } = this.state;
-        // const res = cart.reduce((prev, item) => {
-        //     return prev + (item.price * value);
-        // }, 0)
-        // this.setState({ total: res })
-        cart.every(item =>{
-            const totalPrice = item.price * value;
-            // return totalPrice
-            this.setState({total: totalPrice})
+
+    // decrease item count
+    decreaseCount = (id: string) => {
+        const { cart } = this.state;
+        cart.forEach(item => {
+            if(item.productName === id) {
+                item.count === 1 ? item.count = 1 : item.count -= 1;
+            }
         })
+        this.setState({cart: cart})
+        this.getTotalPrice()
     }
 
+    // increse item count
+    increaseCount = (id: string) => {
+        const { cart } = this.state;
+        cart.forEach(item => {
+            if(item.productName === id) {
+                item.count += 1;
+            }
+        })
+        this.setState({ cart: cart })
+        this.getTotalPrice()
+    }
 
+    getTotalPrice = () => {
+        const {cart } = this.state;
+        const total =  cart.reduce((prev, item) => {
+            return prev + (item.price * item.count);
+        }, 0)
+        this.setState({ total: total })
+    }
     
     
 
     render() {
+
+        console.log(this.state.total)
 
         return (
             <CartContext.Provider value={{
                 cart: this.state.cart,
                 addToCart: this.addProductToCart,
                 removeProduct: this.removeProductfromCart,
-                updateValue: this.updateValueCount,
-                total: this.state.total
+                total: this.state.total,
+                increase: this.increaseCount,
+                decrease: this.decreaseCount,
+                getTotal: this.getTotalPrice,
             }
             }>
                 {this.props.children}

@@ -1,13 +1,12 @@
-import { Component, ContextType, CSSProperties } from "react";
+import React, { Component, ContextType, CSSProperties } from "react";
 import { Button } from 'antd'
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { CartContext } from "../context/CartContext";
-import { RouteComponentProps } from "react-router-dom";
-import { InputNumber, Popconfirm, message } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
 
 import '../css/cart.css';
 import "../css/layout.css";
+import { Link } from "react-router-dom";
 
 interface Props {
     isOpen: boolean;
@@ -20,8 +19,8 @@ class ShoppingCartSidebar extends Component<Props> {
     context!: ContextType<typeof CartContext>
     static contextType = CartContext;
 
-    componentDidMount() {
-        
+    componentDidMount =() => {
+        this.context.getTotal();
     }
 
     render() {
@@ -32,7 +31,9 @@ class ShoppingCartSidebar extends Component<Props> {
                 <aside style={sidebarStyle(this.props)} >
                     <div className="flex-col">
                         <div>
-                            <ArrowRightOutlined style={{ fontSize: '2rem' }} onClick={this.props.onSidebarClose}/>
+                            <Link to="/shop">
+                                <ArrowRightOutlined style={{ fontSize: '2rem' }} onClick={this.props.onSidebarClose}/>
+                            </Link>
                         </div>
                     </div>
             <div className="flex-col cart-div centerY">  
@@ -45,20 +46,17 @@ class ShoppingCartSidebar extends Component<Props> {
                             </div>
                                 <div className="flex-col">
                                     <p>{item.productName}</p>
-                                    <p style={{ color: 'red' }}>{item.price}kr</p>
+                                    <p style={{ color: 'red' }}>{item.price * item.count}kr</p>
                                 <div/>   
                             </div>
-                                <div>
-                                    <InputNumber style={{width: "4rem"}} onChange={this.context.updateValue} min={1} max={10} defaultValue={item.count} bordered={true} />
+                                <div className="flex centerY centerX">
 
-
-
-                                    {/* <Popconfirm placement="top" title={text} onConfirm={() => this.context.removeProduct(item.productName)} okText="Yes" cancelText="No"> */}
+                                    <Button onClick={() => this.context.decrease(item.productName)}>-</Button>
+                                        <span style={{margin: "0 .5rem"}}> {item.count}</span>
+                                    <Button onClick={() => this.context.increase(item.productName)}>+</Button>
                                   
-                                        <CloseOutlined onClick={() => this.context.removeProduct(item.productName)}style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
+                                    <CloseOutlined onClick={() => this.context.removeProduct(item.productName)}style={{ fontSize: '1rem', color: 'red', marginLeft: ".5rem" }}/>
                                 
-                                    {/* </Popconfirm> */}
-
                                 </div>
                         </div>
                 
