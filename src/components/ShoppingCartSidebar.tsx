@@ -65,7 +65,9 @@ class ShoppingCartSidebar extends Component<Props> {
             </div>
             <div className="flex">
                 <h3 style={{paddingRight: '1rem'}}>Total: {this.context.total}kr</h3>
-                <Button>Check Out</Button>
+                <Link to="/checkout">
+                    <Button>Check Out</Button>
+                </Link>
             </div>  
             </aside>
             </>

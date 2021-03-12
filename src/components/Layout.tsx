@@ -7,6 +7,7 @@ import { Footer } from "antd/lib/layout/layout";
 import { Route, Switch } from "react-router";
 import Shop from "./Shop";
 import ShoppingCartSidebar from './ShoppingCartSidebar'
+import CheckOut from "./checkOut";
 
 
 interface State {
@@ -37,12 +38,16 @@ class Layout extends Component<{}, State> {
                     <Route path="/shop">
                         <Shop />
                     </Route>
-                <Route path="/cart">
-                <ShoppingCartSidebar 
-                    onSidebarClose={this.toggleShoppingCart}
-                    isOpen={this.state.isSidebarOpen}
-                    />
-                </Route>
+                    <Route path="/cart">
+                        <ShoppingCartSidebar 
+                            onSidebarClose={this.toggleShoppingCart}
+                            isOpen={this.state.isSidebarOpen}
+                            />
+                    </Route>
+                    <Route path="/checkout">
+                        <CheckOut />
+                    </Route>
+
                 </Switch>
                 <Footer style={{textAlign: "center"}}>
                     Anton X Gustav <br />clothing
