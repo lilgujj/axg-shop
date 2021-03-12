@@ -8,6 +8,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 
 
+
 interface State {
     value: number
     shippingValue: number
@@ -23,7 +24,7 @@ class CheckOut extends Component<{}, State> {
     };
 
     onChange = (e: any) => {
-        console.log('radio checked', e.target.value);
+        // console.log('radio checked', e.target.value);
         const value = e.target.value
         this.setState({
             value: value
@@ -42,7 +43,7 @@ class CheckOut extends Component<{}, State> {
 
     render() {
 
-        // const { value } = this.state
+        const { value } = this.state
 
       
         const validatePersonalMessages = {
@@ -71,7 +72,7 @@ class CheckOut extends Component<{}, State> {
                         <Form.Item name={["user", "email"]} label="Email" rules={[{ required: true, type: "email"}]}>
                             <Input />
                         </Form.Item>
-                        <Form.Item name="phone" label="Phone Number" rules={[{ required: true, type: "number"}]}>
+                        <Form.Item name="phone" label="Phone Number" rules={[{ required: true}]}>
                             <Input/>
                         </Form.Item>
                         <Form.Item name={["user", "adress"]} label="Adress" rules={[{ required: true}]}>
@@ -84,16 +85,64 @@ class CheckOut extends Component<{}, State> {
                 </div>
                 <div className="formBorder">
                     <Form className="flex-col centerY centerX" name="nest-messages" >
+
                         <h3>Payment method</h3>
-                        <Radio.Group onChange={this.onChange} value={this.state.value}>
-                            <Radio onClick={() => {console.log(this.state.value)}}value={1}>Swish</Radio>
-                            <Radio onClick={() => {console.log(this.state.value)}} value={2}>Credit Card</Radio>
-                            <Radio onClick={() => {console.log(this.state.value)}}value={3}>Bitcoin</Radio>
+
+                        <Radio.Group>
+                            <Link to="/checkout/swish">
+                                <Radio value={1} onChange={this.onChange}>
+                                    Swish
+                                </Radio>
+                            </Link>
+                            <Link to="/checkout/credit-card">
+                                <Radio value={2} onChange={this.onChange}>Credit Card</Radio>
+                            </Link>
+                            <Link to="/checkout/klarna">
+                                <Radio value={3} onChange={this.onChange}>Klarna</Radio>
+                            </Link>
+
                         </Radio.Group>
                     </Form>
-                 
                 </div>
-                <div className="formBorder">
+                
+                <Switch>
+                    <Route path="/checkout/swish">
+                        <div className="formBorder" style={{marginTop: ".5rem"}}>
+                            <Form className="flex-col centerY centerX" name="nest-messages" validateMessages={validatePersonalMessages}>
+                                <Form.Item name="phone" label="Phone Number" rules={[{ required: true}]}>
+                                    <Input/>
+                                </Form.Item>
+                            </Form>
+                        </div>
+                    </Route>
+                    <Route path="/checkout/credit-card">
+                        <div className="formBorder" style={{marginTop: ".5rem"}}>
+                            <Form className="flex-col centerY centerX" name="nest-messages" validateMessages={validatePersonalMessages}>
+                                <Form.Item name="cart" label="Card Number" rules={[{ required: true}]}>
+                                    <Input/>
+                                </Form.Item>
+                                <div className="flex centerX centerY ">
+                                    <Form.Item name="card" label="Expiraition Date" rules={[{ required: true}]}>
+                                        <Input/>
+                                    </Form.Item>
+                                    <Form.Item name="cvv" label="CVV" style={{width: "6rem"}}rules={[{ required: true}]}>
+                                        <Input/>
+                                    </Form.Item>
+                                </div>
+                            </Form>
+                        </div>
+                    </Route>
+                    <Route path="/checkout/klarna">
+                        <div className="formBorder" style={{marginTop: ".5rem"}}>
+                            <Form className="flex-col centerY centerX" name="nest-messages" validateMessages={validatePersonalMessages}>
+                                <Form.Item name="email" label="Klarna Email" rules={[{ required: true}]}>
+                                    <Input/>
+                                </Form.Item>
+                            </Form>
+                        </div>
+                    </Route>
+                </Switch>
+<div className="formBorder">
                     <Form className="flex-col centerY centerX" name="nest-messages" >
                         <h3>Shipping</h3>
                         <Radio.Group onChange={this.changeShipping} value={this.state.shippingValue}>
@@ -138,7 +187,6 @@ class CheckOut extends Component<{}, State> {
                             </div>      
                         </Route>
                     </Switch>
-
                
             </div>
             </>
