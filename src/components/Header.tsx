@@ -7,9 +7,7 @@ import { Badge } from 'antd';
 import { CartContext  } from "../context/CartContext"
 
 
-interface Props {
-    handleClick: () => void;
-}
+interface Props {}
 
 interface State {
     toggleNavbar: boolean
@@ -79,7 +77,7 @@ class Header extends Component<Props, State> {
 
                                         <Link to='/cart'>
                                             <Badge count={cart.length} showZero>
-                                                <ShoppingCartOutlined style={{fontSize: '2rem', color: 'white'}} onClick={this.props.handleClick}/>
+                                                <ShoppingCartOutlined style={{fontSize: '2rem', color: 'white'}} />
                                             </Badge>
                                         </Link>
                                     </div>

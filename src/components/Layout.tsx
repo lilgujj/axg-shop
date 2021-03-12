@@ -9,26 +9,14 @@ import Shop from "./Shop";
 import ShoppingCartSidebar from './ShoppingCartSidebar'
 
 
-interface State {
-    isSidebarOpen: boolean;
-  }
-class Layout extends Component<{}, State> {
-
-    state: State = {
-        isSidebarOpen: false
-    }
-
-
-    toggleShoppingCart = () => {
-        this.setState({ isSidebarOpen: !this.state.isSidebarOpen })
-    }
+class Layout extends Component {
 
     render() {
 
         // console.log(this.state)
         return (
             <div className="flex-col">
-                <Header handleClick={this.toggleShoppingCart}/>
+                <Header />
 
                 <Switch>
                     <Route exact path="/">
@@ -38,10 +26,7 @@ class Layout extends Component<{}, State> {
                         <Shop />
                     </Route>
                 <Route path="/cart">
-                <ShoppingCartSidebar 
-                    onSidebarClose={this.toggleShoppingCart}
-                    isOpen={this.state.isSidebarOpen}
-                    />
+                <ShoppingCartSidebar />
                 </Route>
                 </Switch>
                 <Footer style={{textAlign: "center"}}>
