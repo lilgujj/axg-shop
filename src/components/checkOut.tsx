@@ -4,6 +4,7 @@ import shopImg from "../images/shop-img.jpg";
 import "../css/layout.css"
 import "../css/checkOut.css"
 import { CartContext } from "../context/CartContext";
+import React from "react";
 
 
 
@@ -15,15 +16,16 @@ interface PersonalData {
     errors?: string[];
   }
 
-    const validateMessages = {
-        required: '${label} is required!',
-        types: {
-            email: '${label} is not a valid email!',
-            number: '${label} is not a valid number!',
-        }
-    };
+  
+  const CheckOut = () => {
 
-    const CheckOut = () => {
+        const validateMessages = {
+            required: '${label} is required!',
+            types: {
+                email: '${label} is not a valid email!',
+                number: '${label} is not a valid number!',
+            }
+        };
         const [form] = Form.useForm();
 
         const [isProceedValid, setProceed] = useState(false)
@@ -111,7 +113,7 @@ interface PersonalData {
         }
         
     return(
-        <>
+        <div> 
 
          <img className="imageBack" src={shopImg} alt=""/>
             <h1 style={{ textAlign: 'center', marginTop: '30rem' }}>Payment</h1>
@@ -197,9 +199,7 @@ interface PersonalData {
                     }
                 </div>
             </div>
-
-        
-        </>
+        </div>
     )
 }
 
