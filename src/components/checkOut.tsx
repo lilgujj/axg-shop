@@ -142,7 +142,7 @@ class CheckOut extends Component<{}, State> {
                         </div>
                     </Route>
                 </Switch>
-<div className="formBorder">
+            <div className="formBorder">
                     <Form className="flex-col centerY centerX" name="nest-messages" >
                         <h3>Shipping</h3>
                         <Radio.Group onChange={this.changeShipping} value={this.state.shippingValue}>
