@@ -110,7 +110,6 @@ class DataProvider extends Component<{}, State> {
 
     render() {
 
-        console.log(this.state.total)
 
         return (
             <CartContext.Provider value={{
