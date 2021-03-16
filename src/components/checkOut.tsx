@@ -1,6 +1,6 @@
 import { Button, Form, Input, Radio, Select } from "antd";
 import { AntTreeNode, AntTreeNodeProps } from "antd/lib/tree";
-import React, { Component, ContextType, useDebugValue, useState } from "react";
+import React, { Component, ContextType, useContext, useDebugValue, useState } from "react";
 import shopImg from "../images/shop-img.jpg";
 import "../css/layout.css"
 import "../css/checkOut.css"
@@ -20,19 +20,18 @@ interface PersonalData {
   interface PersonalInformation {
     onChangePersonal: (personalInfo: PersonalData[]) => void;
     personalInfo: PersonalData[];
+    proceed: () => void;
   }
   
-//   interface PaymentInformation {
-//     onChangePayment: (paymentlInfo: PaymentdData[]) => void;
-//     paymentInfo: PaymentdData[];
-//   }
-
-
-
-
-const CheckOut = () => {
-    
-      const PersonalForm: React.FC<PersonalInformation> = ({ onChangePersonal, personalInfo }) => (
+  //   interface PaymentInformation {
+      //     onChangePayment: (paymentlInfo: PaymentdData[]) => void;
+      //     paymentInfo: PaymentdData[];
+      //   }
+      
+      
+      
+      
+      const PersonalForm: React.FC<PersonalInformation> = ({ onChangePersonal, personalInfo, proceed }) => (
         <Form className="flex-col centerY centerX" fields={personalInfo} onFieldsChange={(_, allFields) => onChangePersonal(allFields)} name="nest-messages" validateMessages={validateMessages}>
             <h3>Personal Information</h3>
             <Form.Item name="firstname" label="Firstname" rules={[{ required: true}]}>
@@ -44,17 +43,15 @@ const CheckOut = () => {
             <Form.Item name="email" label="Email" rules={[{ required: true, type: "email"}]}>
                 <Input />
             </Form.Item>
-            <Form.Item name="phone" label="Phone Number" rules={[{ required: true}]}>
+            <Form.Item name={["phone"]} label="Phone Number" rules={[{ required: true}]}>
                 <Input/>
             </Form.Item>
             <Form.Item name="adress" label="Adress" rules={[{ required: true}]}>
                 <Input/>
             </Form.Item>
-            <Radio.Group>
-              <Radio.Button onClick={openSwish}value="a">Swish</Radio.Button>
-              {/* <Radio.Button value="b">Credit-Card</Radio.Button>
-              <Radio.Button value="c">Klarna</Radio.Button> */}
-            </Radio.Group>
+            <Form.Item>
+                <Button onClick={proceed} type="primary" htmlType="submit">Proceed</Button>
+            </Form.Item>
         </Form>
     );
     
@@ -67,30 +64,80 @@ const CheckOut = () => {
           }
       };
 
-    function openSwish() {
-        
-    }
+    const CheckOut = () => {
 
+        const cart = useContext(CartContext)
+
+        const [personalInfo, setFields] = useState<PersonalData[]>([
+            { 
+                name: ['firstname'], value: '',
+            },
+            {
+                name: ['lastname'], value: ''
+            },
+            {
+                name: ['email'], value: ''
+            },
+            {
+                name: ['adress'], value: ''
+            },
+            {
+                name: ['phone'], value: ''
+            },
+        ]);
     
-    const [personalInfo, setFields] = useState<PersonalData[]>([
-        { 
-            name: ['firstname'], value: '',
-        },
-        {
-            name: ['lastname'], value: ''
-        },
-        {
-            name: ['email'], value: ''
-        },
-        {
-            name: ['adress'], value: ''
-        },
-        {
-            name: ['phone'], value: ''
-        },
-    ]);
+        const [isSwishVisable, setSwish] = useState(false)
 
-    console.log(personalInfo[0].value)
+        const showSwish = () => {
+            setSwish(!isSwishVisable)
+            setKlarna(false)
+            setCredit(false)
+        }
+        const [isKlarnaVisable, setKlarna] = useState(false)
+
+        const showKlarna = () => {
+            setKlarna(!isKlarnaVisable)
+            setSwish(false)
+            setCredit(false)
+            
+        }
+        const [isCreditVisable, setCredit] = useState(false)
+
+        const showCreditCard = () => {
+            setCredit(!isCreditVisable)
+            setKlarna(false)
+            setSwish(false)
+            
+        }
+        const [isPostNordVisable, setPostNord] = useState(false)
+
+        const showPostNord = () => {
+            setPostNord(!isPostNordVisable)
+            setDhl(false)
+            setSchenker(false)
+        }
+        const [isDhlVisable, setDhl] = useState(false)
+
+        const showDhl = () => {
+            setDhl(!isKlarnaVisable)
+            setPostNord(false)
+            setSchenker(false)
+            
+        }
+        const [isSchenkerVisable, setSchenker] = useState(false)
+
+        const showSchenker = () => {
+            setSchenker(!isCreditVisable)
+            setPostNord(false)
+            setDhl(false)
+            
+        }
+
+        const [isProceedValid, setProceed] = useState(false)
+
+        const showPaymentShippment = () => {
+            setProceed(!isProceedValid);
+        }
     return(
         <>
 
@@ -98,14 +145,69 @@ const CheckOut = () => {
             <h1 style={{ textAlign: 'center', marginTop: '30rem' }}>Payment</h1>
             <div className="flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
                 <div className="formBorder" style={{margin: ".5rem 0"}}>
+                    
                     <PersonalForm 
                         personalInfo={personalInfo}
+                        proceed={showPaymentShippment}
                         onChangePersonal={newFields => {
                             setFields(newFields)
                         }}
-                    />
+                    /> 
+                    {
+                        isProceedValid &&(
+                            <>
+                                <div>
+                                    <Radio.Group>
+                                        <Radio.Button onClick={showSwish} value="a">Swish</Radio.Button>
+                                        <Radio.Button onClick={showKlarna} value="b">Klarna</Radio.Button>
+                                        <Radio.Button onClick={showCreditCard} value="c">Credit Card</Radio.Button>
+                                    </Radio.Group>
+                                    {   
+                                        isSwishVisable && (<Input value={personalInfo[3].value}/> )
+                                    }
+                                    {   
+                                        isKlarnaVisable && (<Input value={personalInfo[2].value}/> )
+                                    }
+                                    {   
+                                        isCreditVisable && (
+                                            <h2>hej</h2>
+                                        )
+                                    }
+                                </div>
+            
+                                
+                                <div>
+                                    <Radio.Group>
+                                        <Radio.Button onClick={showPostNord} value="a">Post Nord</Radio.Button>
+                                        <Radio.Button onClick={showDhl} value="b">DHL</Radio.Button>
+                                        <Radio.Button onClick={showSchenker} value="c">Schenker</Radio.Button>
+                                    </Radio.Group>
+                                    {   
+                                        isPostNordVisable && (
+                                            <div>
+                                                <h2>Shipping price: 59kr</h2>
+                                                <p>{cart.total}kr + 59kr</p>
+                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 59}kr</h3>
+                                            </div>
+                                            )
+                                    }
+                                    {   
+                                        isDhlVisable && ( <h2>DHL</h2> )
+                                    }
+                                    {   
+                                        isSchenkerVisable && (
+                                            <h2>Schenker</h2>
+                                        )
+                                    }
+                                </div>
+                                <Button type="primary" htmlType="submit">Place order</Button>           
+
+                            </>
+                        )
+                    }
                 </div>
             </div>
+
         
         </>
     )
