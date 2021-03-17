@@ -1,4 +1,6 @@
-import { Component, ContextType } from "react";
+
+import React, { Component, ContextType, CSSProperties } from "react";
+import { ArrowRightOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import { CartContext } from "../context/CartContext";
 import { CloseOutlined } from "@ant-design/icons";
@@ -19,6 +21,7 @@ class ShoppingCartSidebar extends Component<Props> {
 
   render() {
     const { cart } = this.context;
+
     return (
       <>
         <img className="imageBack" src={shopImg} alt="" />
@@ -50,7 +53,7 @@ class ShoppingCartSidebar extends Component<Props> {
                     +
                   </Button>
 
-                  <CloseOutlined
+                 <CloseOutlined
                     onClick={() => this.context.removeProduct(item.productName)}
                     style={{
                       fontSize: "1rem",
