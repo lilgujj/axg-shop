@@ -11,15 +11,33 @@ interface Props {}
 
 interface State {
     toggleNavbar: boolean
+    className: string
 }
 class Header extends Component<Props, State> {
     context!: ContextType<typeof CartContext>
     static contextType = CartContext;
 
     state: State = {
-        toggleNavbar: false
+        toggleNavbar: false,
+        className: ""
     }
 
+    componentDidMount(){
+        window.addEventListener("scroll", this.handleScroll);
+      }
+      
+      handleScroll=()=>{
+        if (window.pageYOffset > 0) {
+            if(!this.state.className){
+              this.setState({ className: "black" });   
+            }
+        }else{
+            if(this.state.className){
+              this.setState({ className: "" });
+            }
+        }
+       
+      }
 
     menuToggle = () => {
         this.setState({
@@ -37,7 +55,7 @@ class Header extends Component<Props, State> {
 
                 {({ cart }) => {
                     return(
-                        <nav className="flex centerX centerY">
+                        <nav className="flex centerX centerY" id={this.state.className}>
                             <div className="flex space-between centerY nav-div">
                                 <div className="menu">
                                     <BarsOutlined onClick={this.menuToggle} style={{ fontSize: '2rem' }}/>
