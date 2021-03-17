@@ -113,66 +113,93 @@ interface PersonalData {
         }
         
     return(
-        <div> 
+        <div className="formContainer flex centerY centerX"> 
+            <div className="form formBorder flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
+                <div style={{margin: ".5rem 0", width: "100%"}}>
 
-         <img className="imageBack" src={shopImg} alt=""/>
-            <h1 style={{ textAlign: 'center', marginTop: '30rem' }}>Payment</h1>
-            <div className="flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
-                <div className="formBorder" style={{margin: ".5rem 0"}}>
-
-                <Form form={form} name="dynamic_rules" className="flex-col centerY centerX" 
+                <Form form={form} layout="vertical" name="dynamic_rules" className="formInfo flex-col centerY centerX payment" 
                 fields={personalInfo} 
                 onFieldsChange={(_, allFields) => onChangePersonal(allFields)} 
                 validateMessages={validateMessages}>
-                    <h3>Personal Information</h3>
-                    <Form.Item name="firstname" label="Firstname" rules={[{ required: true}]}>
+                
+                    <h3 style={{paddingTop: "1rem"}}>Personal Information</h3>
+                    
+                    <Form.Item style={{width: "80%"}} name="firstname" label="Firstname" rules={[{ required: true}]}>
+                            <Input/>
+                    </Form.Item>
+                    <Form.Item style={{width: "80%"}} name="lastname" label="Lastname" rules={[{ required: true}]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="lastname" label="Lastname" rules={[{ required: true}]}>
+                    <Form.Item style={{width: "80%"}} name="email" label="Email" rules={[{ required: true, type: "email"}]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="email" label="Email" rules={[{ required: true, type: "email"}]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item name={["phone"]} label="Phone Number" rules={[{ required: true}]}>
+                    <Form.Item style={{width: "80%"}} name={["phone"]} label="Phone Number" rules={[{ required: true}]}>
                         <Input/>
                     </Form.Item>
-                    <Form.Item name="adress" label="Adress" rules={[{ required: true}]}>
+                    <Form.Item style={{width: "80%"}} name="adress" label="Adress" rules={[{ required: true}]}>
                         <Input/>
                     </Form.Item>
                     <Form.Item>
-                        <Button onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+                        <Button  onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
                     </Form.Item>
                 </Form>
   
                     {
                         isProceedValid &&(
                             <>
-                                <div>
-                                    <Radio.Group>
-                                        <Radio.Button onClick={showSwish} value="a">Swish</Radio.Button>
-                                        <Radio.Button onClick={showKlarna} value="b">Klarna</Radio.Button>
-                                        <Radio.Button onClick={showCreditCard} value="c">Credit Card</Radio.Button>
+                                <div className="flex-col centerX centerY payment">
+                                    <Radio.Group className="flex centerX centerY">
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showSwish} value="a">Swish</Radio.Button>
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showKlarna} value="b">Klarna</Radio.Button>
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showCreditCard} value="c">Credit Card</Radio.Button>
                                     </Radio.Group>
                                     {   
-                                        isSwishVisable && (<Input value={personalInfo[3].value}/> )
+                                        
+                                        isSwishVisable && (
+                                            <Form layout="vertical" className="flex centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} label="Phone Number">
+                                                    <Input value={personalInfo[3].value}/> 
+                                                </Form.Item>
+                                            </Form>
+                                        )
                                     }
                                     {   
-                                        isKlarnaVisable && (<Input value={personalInfo[2].value}/> )
+                                        isKlarnaVisable && (
+                                            <Form layout="vertical" className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} label="Email">
+                                                    <Input value={personalInfo[2].value}/> 
+                                                </Form.Item>
+                                            </Form>
+                                        )
                                     }
                                     {   
                                         isCreditVisable && (
-                                            <h2>hej</h2>
+                                            <Form layout="vertical" className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} label="Full Name">
+                                                    <Input/> 
+                                                </Form.Item>
+                                                <Form.Item style={{width: "80%"}} label="Card Number">
+                                                    <Input/> 
+                                                </Form.Item>
+                                                <div className="flex centerX centerY">
+                                                    <Form.Item style={{width: "80%"}} label="MM / YY">
+                                                        <Input/> 
+                                                    </Form.Item>
+                                                    <Form.Item style={{width: "80%"}} label="CVC">
+                                                        <Input/> 
+                                                    </Form.Item>
+                                                </div>
+                                            </Form>
                                         )
                                     }
                                 </div>
             
                                 
-                                <div>
+                                <div className="payment flex-col centerY centerX">
                                     <Radio.Group>
-                                        <Radio.Button onClick={showPostNord} value="a">Post Nord</Radio.Button>
-                                        <Radio.Button onClick={showDhl} value="b">DHL</Radio.Button>
-                                        <Radio.Button onClick={showSchenker} value="c">Schenker</Radio.Button>
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="a">Post Nord</Radio.Button>
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="b">DHL</Radio.Button>
+                                        <Radio.Button style={{margin: ".5rem"}} onClick={showSchenker} value="c">Schenker</Radio.Button>
                                     </Radio.Group>
                                     {   
                                         isPostNordVisable && (
