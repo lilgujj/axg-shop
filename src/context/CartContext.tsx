@@ -1,5 +1,6 @@
 import React, { Component, createContext } from 'react';
 import { Product, products } from '../products';
+import { message } from 'antd';
 
 
 export const CartContext = createContext<ContextValue>({
@@ -41,7 +42,16 @@ class DataProvider extends Component<{}, State> {
         const { cart } = this.state;
         const check = cart.every(item => {
             return item.productName !== id
+            
         })
+        const success = () => {
+           message.success('The product has been added to cart', 2);
+         };
+
+         const warning = () => {
+            message.warning('The product has already been added to cart', 2);
+          };
+       
         
         if(check) {
             const product = products.find(product => {
@@ -51,8 +61,9 @@ class DataProvider extends Component<{}, State> {
             const cartProduct: CartProduct = { ...product, count: 1 }
 
             this.setState({ cart: [...cart, cartProduct]})
+            success();
         }else {
-            alert("the product has already been added to cart")
+            warning();
         }
 
      }
@@ -60,6 +71,9 @@ class DataProvider extends Component<{}, State> {
 
     removeProductfromCart = (id: string) => {
 
+        const error = () => {
+            message.error('The product has been deleted', 2);
+          };
         // if(window.confirm("Do you wanna delete this product")) {
             const { cart } = this.state;
             cart.forEach((item, index) => {
@@ -70,7 +84,8 @@ class DataProvider extends Component<{}, State> {
                 })
                 this.setState({ cart: cart })
                 this.getTotalPrice()
-        // }
+        // } 
+        error();
     }
     
 
