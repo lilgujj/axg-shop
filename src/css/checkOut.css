@@ -27,9 +27,18 @@
     margin: 1rem;
     text-align: center;
 }
+.radioBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-@media (max-width: 330px) {
+@media (max-width: 350px) {
     .formBorder {
         padding: .5rem 1rem;
-}
+    }
+    .radioBtn {
+        flex-direction: column;
+    }
+
 }

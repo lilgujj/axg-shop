@@ -39,6 +39,19 @@ interface PersonalData {
             console.log('Failed:', errorInfo);
           }
         };
+
+        const [isSecondProceedValid, setSecondProceed] = useState(false);
+
+        const onSecondCheck = async () => {
+            try {
+            const values = await form.validateFields();
+            console.log('Success:', values);
+            setSecondProceed(!isSecondProceedValid);
+          } catch (errorInfo) {
+            console.log('Failed:', errorInfo);
+          }
+        }
+
         const cart = useContext(CartContext)
 
         const [personalInfo, setFields] = useState<PersonalData[]>([
@@ -100,7 +113,7 @@ interface PersonalData {
         const [isSchenkerVisable, setSchenker] = useState(false)
 
         const showSchenker = () => {
-            setSchenker(!isCreditVisable)
+            setSchenker(!isSchenkerVisable)
             setPostNord(false)
             setDhl(false)
             
@@ -149,61 +162,77 @@ interface PersonalData {
                             <>
                                 <div className="flex-col centerX centerY payment">
                                     <Radio.Group className="flex centerX centerY">
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showSwish} value="a">Swish</Radio.Button>
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showKlarna} value="b">Klarna</Radio.Button>
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showCreditCard} value="c">Credit Card</Radio.Button>
+                                        <div className="radioBtn">
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showSwish} value="a">Swish</Radio.Button>
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showKlarna} value="b">Klarna</Radio.Button>
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showCreditCard} value="c">Credit Card</Radio.Button>
+                                        </div>
                                     </Radio.Group>
                                     {   
                                         
                                         isSwishVisable && (
-                                            <Form layout="vertical" className="flex centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} label="Phone Number">
+                                            <Form form={form} layout="vertical" validateMessages={validateMessages} name="dynamic_rules" className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}}  label="Phone Number" rules={[{ required: true}]}>
                                                     <Input value={personalInfo[3].value}/> 
+                                                </Form.Item>
+                                                <Form.Item>
+                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
                                                 </Form.Item>
                                             </Form>
                                         )
                                     }
                                     {   
                                         isKlarnaVisable && (
-                                            <Form layout="vertical" className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} label="Email">
+                                            <Form form={form} layout="vertical" validateMessages={validateMessages}  name="dynamic_rules" className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} label="Email" rules={[{ required: true}]}>
                                                     <Input value={personalInfo[2].value}/> 
+                                                </Form.Item>
+                                                <Form.Item>
+                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
                                                 </Form.Item>
                                             </Form>
                                         )
                                     }
                                     {   
                                         isCreditVisable && (
-                                            <Form layout="vertical" className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} label="Full Name">
+                                            <Form form={form} layout="vertical" validateMessages={validateMessages} name="dynamic_rules" className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} name="Full Name" label="Full Name" rules={[{ required: true}]}>
                                                     <Input/> 
                                                 </Form.Item>
-                                                <Form.Item style={{width: "80%"}} label="Card Number">
+                                                <Form.Item style={{width: "80%"}} name="Card Number" label="Card Number" rules={[{ required: true}]}>
                                                     <Input/> 
                                                 </Form.Item>
                                                 <div className="flex centerX centerY">
-                                                    <Form.Item style={{width: "80%"}} label="MM / YY">
+                                                    <Form.Item style={{width: "80%"}} name="MM/YY" label="MM / YY" rules={[{ required: true}]}>
                                                         <Input/> 
                                                     </Form.Item>
-                                                    <Form.Item style={{width: "80%"}} label="CVC">
+                                                    <Form.Item style={{width: "80%"}} name="CVC" label="CVC" rules={[{ required: true}]}>
                                                         <Input/> 
                                                     </Form.Item>
                                                 </div>
+                                                <Form.Item>
+                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
+                                                </Form.Item>
                                             </Form>
                                         )
                                     }
                                 </div>
             
-                                
+                                {
+                                    isSecondProceedValid && (
+                                        <>
                                 <div className="payment flex-col centerY centerX">
                                     <Radio.Group>
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="a">Post Nord</Radio.Button>
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="b">DHL</Radio.Button>
-                                        <Radio.Button style={{margin: ".5rem"}} onClick={showSchenker} value="c">Schenker</Radio.Button>
+                                        <div className="radioBtn">
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="a">PostNord</Radio.Button>
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="b">DHL</Radio.Button>
+                                            <Radio.Button style={{margin: ".5rem"}} onClick={showSchenker} value="c">Schenker</Radio.Button>
+                                        </div>
                                     </Radio.Group>
                                     {   
                                         isPostNordVisable && (
-                                            <div>
+                                            <div className="flex-col centerY centerX">
+                                                <h2>PostNord</h2>
                                                 <h2>Shipping price: 59kr</h2>
                                                 <p>{cart.total}kr + 59kr</p>
                                                 <h3 style={{ color: 'red' }}>Total: {cart.total + 59}kr</h3>
@@ -211,15 +240,33 @@ interface PersonalData {
                                             )
                                     }
                                     {   
-                                        isDhlVisable && ( <h2>DHL</h2> )
+                                        isDhlVisable && ( 
+                                            <div className="flex-col centerY centerX">
+                                                <h2>DHL</h2>
+                                                <h2>Shipping price: 79kr</h2>
+                                                <p>{cart.total}kr + 79kr</p>
+                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 79}kr</h3>
+                                            </div> 
+                                            )
                                     }
                                     {   
                                         isSchenkerVisable && (
-                                            <h2>Schenker</h2>
+                                            <div className="flex-col centerY centerX">
+                                                <h2>Schenker</h2>
+                                                <h2>Shipping price: 99kr</h2>
+                                                <p>{cart.total}kr + 99kr</p>
+                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 99}kr</h3>
+                                            </div>
                                         )
                                     }
                                 </div>
-                                <Button type="primary" htmlType="submit">Place order</Button>           
+                                <div className="flex centerY centerX">
+                                    <Button type="primary" htmlType="submit">Place order</Button>           
+                                </div>
+
+                                    </>
+                                    )
+                                }
 
                             </>
                         )
