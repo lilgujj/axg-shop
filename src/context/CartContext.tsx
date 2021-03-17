@@ -97,6 +97,7 @@ class DataProvider extends Component<{}, State> {
                 item.count === 1 ? item.count = 1 : item.count -= 1;
             }
         })
+        cart.length--
         this.setState({cart: cart})
         this.getTotalPrice()
     }
@@ -109,6 +110,7 @@ class DataProvider extends Component<{}, State> {
                 item.count += 1;
             }
         })
+        cart.length++
         this.setState({ cart: cart })
         this.getTotalPrice()
     }
