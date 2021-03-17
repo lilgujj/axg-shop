@@ -5,7 +5,7 @@ import { CartContext } from "../context/CartContext"
 
 import "../css/layout.css"
 import "../css/shop.css"
-import { Product, products } from "../products"
+import { products } from "../products"
 
 
 
@@ -42,7 +42,7 @@ class ProductItem extends Component<Props> {
                     } */}
                         <Button onClick={() => this.context.addToCart(product.productName)} style={{margin: ".5rem"}}>Buy Now</Button>
                         <Link to="/shop">
-                            <Button style={{margin: ".5rem"}}>Go back</Button>
+                            <Button style={{margin: ".5rem"}}>Other Products</Button>
                         </Link>
                     </div>
                 </div>
