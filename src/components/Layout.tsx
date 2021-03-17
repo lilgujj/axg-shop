@@ -6,7 +6,7 @@ import  "../css/layout.css"
 import { Footer } from "antd/lib/layout/layout";
 import { Route, Switch } from "react-router";
 import Shop from "./Shop";
-import ShoppingCartSidebar from './ShoppingCartSidebar'
+import ShoppingCartSidebar from './Cart'
 import CheckOut from "./checkOut";
 
 

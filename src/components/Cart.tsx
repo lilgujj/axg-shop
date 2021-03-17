@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 interface Props {}
 
-class ShoppingCartSidebar extends Component<Props> {
+class Cart extends Component<Props> {
   context!: ContextType<typeof CartContext>;
   static contextType = CartContext;
 
@@ -85,4 +85,4 @@ class ShoppingCartSidebar extends Component<Props> {
         
         
 
-export default ShoppingCartSidebar;
+export default Cart;
