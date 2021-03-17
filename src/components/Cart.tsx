@@ -24,12 +24,23 @@ class Cart extends Component<Props> {
 
     return (
       <>
-        <img className="imageBack" src={shopImg} alt="" />
-        <h1 className="cartH1"
-        >
-          Your order
-        </h1>
+      <div className="cartHeader flex centerX">
+        <div className="cartHeaderDiv flex "> 
+            <h3 className="cartH1">
+            Your order
+          </h3>
+        </div>
+
+      </div>
+ 
+      <div className="cartMain flex flex-col centerX centerY">
+
           <div className="flex-col cart-div centerY">
+            <ul className="flex space-between cartUlList">
+              <li className="productLi">PRODUCT</li>
+              <li>PRICE</li>
+              <li>QTY</li>
+            </ul>
 
             {cart.map((item) => (
               <div className="cartItems flex centerY centerX space-evenly">
@@ -37,10 +48,10 @@ class Cart extends Component<Props> {
                   <img className="cartItemImage" src={item.img} alt="" />
                 <div className="flex-col cartItemText">
                   <p className="itemText">{item.productName}</p>
-                  <p style={{ color: "red" }}>{item.price * item.count}kr</p>
                   <div />
                 </div>
                 </div>
+                  <p style={{ color: "red" }}>{item.price * item.count}kr</p>
 
                 <div className="flex centerY centerX count-div">
                   <Button
@@ -69,14 +80,15 @@ class Cart extends Component<Props> {
         
         
             <div className="flex centerX checkOut-div">
-                <h3 style={{paddingRight: '1rem'}}>Total: {this.context.total}kr</h3>
-                <Link to="/checkout">
-                    <Button>Check Out</Button>
-                </Link>
+                <h3 style={{ marginBottom: '0' }}>Total: {this.context.total}kr</h3>
             </div>  
             
 
             </div>
+                <Link to="/checkout">
+                    <Button style={{ margin: '1rem', border: '1px solid black' }}>Check Out</Button>
+                </Link>
+      </div>
             </>
             
             );
