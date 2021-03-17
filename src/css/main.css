@@ -38,6 +38,31 @@
     font-size: 1.5rem;
 }
 
+.textStyle {
+    position: absolute;
+    margin: auto;
+    zIndex: 10;
+    color: black;
+    padding: .5rem;
+    background: white;
+    border-radius: 1rem;
+    margin-top: .5rem;
+}
+
+
+
+
+.contentStyle  {
+    height: 20rem;
+    color: #fff;
+    lineHeight: 160px;
+    textAlign: center;
+    background: #364d79;
+    max-width: 80%;
+    margin: auto;
+    objectFit: fill;
+  };
+
 @media(max-width: 40em) {
     .newsContainer {
         z-index: -100;
