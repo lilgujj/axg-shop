@@ -15,6 +15,7 @@
 
 .cartMain {
     width: 100%;
+    min-height: 100vh;
 }
 
 .cartUlList {
@@ -37,6 +38,7 @@
 }
 .cart-div {
     width: 90%;
+    min-height: 100%;
     margin: 1rem 0;
     background-color: white;
     padding: 1rem 0;
