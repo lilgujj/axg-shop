@@ -1,4 +1,4 @@
-import React, { Component, createContext } from 'react';
+import { Component, createContext } from 'react';
 import { Product, products } from '../products';
 import { message } from 'antd';
 

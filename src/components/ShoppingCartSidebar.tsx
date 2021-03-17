@@ -1,6 +1,7 @@
+
 import React, { Component, ContextType, CSSProperties } from "react";
-import { Button, Popconfirm } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 import { CartContext } from "../context/CartContext";
 import { CloseOutlined } from "@ant-design/icons";
 import shopImg from "../images/shop-img.jpg";

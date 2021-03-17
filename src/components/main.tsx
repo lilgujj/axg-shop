@@ -1,9 +1,14 @@
-import { Component, CSSProperties} from "react";
+import React, { Component} from "react";
 import "../css/main.css";
 import "../css/layout.css"
-import mainMan from "../images/mainMan.jpg"
 import { Carousel } from 'antd';
 
+import mainMan from "../images/mainMan.jpg"
+import glasses1 from "../images/glasses1.jpg"
+import keps1 from "../images/keps1.jpg"
+import klocka1 from "../images/klocka1.jpg"
+import glasses3 from "../images/glasses3.jpg"
+import { Link } from "react-router-dom";
 class Main extends Component {
 
 
@@ -25,18 +30,30 @@ class Main extends Component {
                         <h2>New releases</h2>
                     </div>
                 <Carousel autoplay style={{zIndex: 100}} >
-                    <div>
-                        <h3 style={contentStyle}>1</h3>
-                    </div>
-                    <div>
-                        <h3 style={contentStyle}>2</h3>
-                    </div>
-                    <div>
-                        <h3 style={contentStyle}>3</h3>
-                    </div>
-                    <div>
-                        <h3 style={contentStyle}>4</h3>
-                    </div>
+                    <Link to="/shop/product/Pink%20Lady%20Glasses">
+                        <div className="textHover flex centerX" >
+                            <h3 className="textStyle"> Show More info</h3>
+                            <img className="contentStyle" src={glasses3} alt="" />
+                        </div>
+                    </Link>
+                    <Link to="/shop/product/Green%20Goblin%20Glasses">
+                        <div className="textHover flex centerX">
+                            <h3 className="textStyle"> Show More info</h3>
+                            <img className="contentStyle" src={glasses1} alt="" />
+                        </div>
+                    </Link>
+                    <Link to="/shop/product/LA%20Snapback">
+                        <div className="textHover flex centerX">
+                            <h3 className="textStyle"> Show More info</h3>
+                            <img className="contentStyle" src={keps1} alt="" />
+                        </div>
+                    </Link>
+                    <Link to="/shop/product/Edifice">
+                        <div className="textHover flex centerX">
+                            <h3 className="textStyle"> Show More info</h3>
+                            <img className="contentStyle" src={klocka1} alt="" />
+                        </div>
+                    </Link>
                 </Carousel>
                 </div>
             </>
@@ -44,15 +61,5 @@ class Main extends Component {
     }
 }
 
-
-const contentStyle: CSSProperties = {
-    height: '20rem',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-    width: '80%',
-    margin: "auto",
-  };
 
 export default Main;
