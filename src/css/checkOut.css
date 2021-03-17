@@ -4,15 +4,11 @@
 
 .form {
     width: 80%;
+    min-height: 100vh
 }
 
 .formInfo {
     width: 100%
-}
-.formBorder {
-    border: 1px solid #F0F2F5;
-    border-radius: 1rem;
-    padding: 2rem;
 }
 
 .payment {

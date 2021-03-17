@@ -16,7 +16,7 @@ class Layout extends Component {
 
         // console.log(this.state)
         return (
-            <div className="flex-col">
+            <div className="flex-col" style={{ minHeight: '100%' }}>
                 <Header />
 
                 <Switch>

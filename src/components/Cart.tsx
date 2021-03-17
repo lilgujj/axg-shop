@@ -24,16 +24,16 @@ class Cart extends Component<Props> {
 
     return (
       <>
+
+ 
+      <div className="cartMain flex flex-col centerX centerY">
       <div className="cartHeader flex centerX">
         <div className="cartHeaderDiv flex "> 
             <h3 className="cartH1">
             Your order
           </h3>
         </div>
-
       </div>
- 
-      <div className="cartMain flex flex-col centerX centerY">
 
           <div className="flex-col cart-div centerY">
             <ul className="flex space-between cartUlList">
