@@ -1,25 +1,23 @@
-import { Component, ContextType } from "react";
+import { Component, ContextType, useDebugValue } from "react";
 import { CartContext } from "../context/CartContext";
 import "../css/layout.css";
 import { Button, Result } from "antd";
 import { PersonalData } from "./checkOut";
-import {mockApi} from "./checkOut"
 
 interface State {
     confirmArray: any[],
     isLoading: boolean,
-  
 }
 
-// async function mockApi(cart: []) {
-//     await timeOut()
-//     return true
-// }
+export async function mockApi(values: {}) {
+    await timeOut()
+    console.log(values)
+    return values
+}
 
-// async function timeOut() {
-//     return new Promise(resolve => setTimeout(resolve, 2000))
-// }
-
+async function timeOut() {
+    return new Promise(resolve => setTimeout(resolve, 2000))
+}
 
 class Confirm extends Component<{}, State> {
     context!: ContextType<typeof CartContext>;
@@ -28,11 +26,18 @@ class Confirm extends Component<{}, State> {
     state: State = {
         confirmArray: [],
         isLoading: true,
+      
     
     }
 
     async componentDidMount() {
-        const res = await mockApi([])
+        const res = await mockApi({
+            firstname: "",
+            lastname: "",
+            email: "",
+            phone: "", 
+            adress: "",
+        })
         console.log(res)
 
 

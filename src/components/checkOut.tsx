@@ -6,7 +6,7 @@ import "../css/checkOut.css"
 import { CartContext } from "../context/CartContext";
 import React from "react";
 import { Link } from "react-router-dom";
-import Confirm from "./confirm";
+import Confirm, { mockApi } from "./confirm";
 
 
 
@@ -20,14 +20,6 @@ export interface PersonalData {
 
   
   
-export async function mockApi(personalInfo: PersonalData[]) {
-    await timeOut()
-    return personalInfo
-}
-
-async function timeOut() {
-    return new Promise(resolve => setTimeout(resolve, 2000))
-}
 const CheckOut = () => {
     
     const validateMessages = {
@@ -45,6 +37,7 @@ const CheckOut = () => {
       try {
         const values = await form.validateFields();
         console.log('Success:', values);
+        mockApi(values)
         setProceed(!isProceedValid);
       } catch (errorInfo) {
         console.log('Failed:', errorInfo);
@@ -82,6 +75,9 @@ const CheckOut = () => {
                 name: ['phone'], value: ''
             },
         ]);
+        const onChangePersonal = (allFields: any) => {
+            setFields(allFields)
+        }
     
         const [isSwishVisable, setSwish] = useState(false)
 
@@ -132,9 +128,6 @@ const CheckOut = () => {
 
         
 
-        const onChangePersonal = (allFields: any) => {
-            setFields(allFields)
-        }
 
 
 
