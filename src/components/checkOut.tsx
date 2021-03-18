@@ -1,12 +1,11 @@
 import { Button, Form, Input, Radio } from "antd";
-import  { useContext, useEffect, useState } from "react";
-import shopImg from "../images/shop-img.jpg";
+import  { useContext, useState } from "react";
 import "../css/layout.css"
 import "../css/checkOut.css"
 import { CartContext } from "../context/CartContext";
-import React from "react";
-import { Link } from "react-router-dom";
-import Confirm, { mockApi } from "./confirm";
+
+import {  Redirect } from "react-router-dom";
+import { mockApi } from "./confirm";
 
 
 
@@ -21,28 +20,27 @@ export interface PersonalData {
   
   
 const CheckOut = () => {
-    
     const validateMessages = {
-        required: '${label} is required!',
+        required: 'required!',
         types: {
-            email: '${label} is not a valid email!',
-            number: '${label} is not a valid number!',
+            email: 'not a valid email!',
+            number: 'not a valid number!',
         }
     };
+    
     const [form] = Form.useForm();
     
     const [isProceedValid, setProceed] = useState(false)
     
-    const onCheck = async () => {
-      try {
-        const values = await form.validateFields();
-        console.log('Success:', values);
-        mockApi(values)
-        setProceed(!isProceedValid);
-      } catch (errorInfo) {
-        console.log('Failed:', errorInfo);
-      }
-    };
+        const onCheck = async () => {
+        try {
+            const values = await form.validateFields();
+            console.log('Success:', values);
+            setProceed(!isProceedValid);
+        } catch (errorInfo) {
+            console.log('Failed:', errorInfo);
+        }
+        };
 
         const [isSecondProceedValid, setSecondProceed] = useState(false);
 
@@ -58,7 +56,7 @@ const CheckOut = () => {
 
         const cart = useContext(CartContext)
 
-        const [personalInfo, setFields] = useState<PersonalData[]>([
+        const [personalInfo, setFields] = useState([
             { 
                 name: ['firstname'], value: '',
             },
@@ -75,10 +73,39 @@ const CheckOut = () => {
                 name: ['phone'], value: ''
             },
         ]);
+
+        const [paymentInfo, setPayment] = useState([
+            {
+                name: ['Full Name'], value: ''
+            },
+            {
+                name: ['Card Name'], value: ''
+            },
+            {
+                name: ['MM/YY'], value: ''
+            },
+            {
+                name: ['CVC'], value: ''
+            }
+        ])
+
         const onChangePersonal = (allFields: any) => {
             setFields(allFields)
         }
+
+        const onChangePayment = (allFields: any) => {
+            setPayment(allFields)
+        }
+
+
+        const sendMock = async () => {
+            let res = await mockApi(personalInfo)
+            console.log(res)
+            setFinish(true)
+        }
     
+        const [isBookingFinished, setFinish] = useState(false);
+
         const [isSwishVisable, setSwish] = useState(false)
 
         const showSwish = () => {
@@ -125,8 +152,11 @@ const CheckOut = () => {
             setDhl(false)
             
         }
-
+        if(isBookingFinished){
+           return <Redirect to="/confirm" />
+        }
     return(
+
         <div className="formContainer flex centerY centerX"> 
             <div className="form flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
                 <div style={{margin: ".5rem 0", width: "100%"}}>
@@ -172,8 +202,12 @@ const CheckOut = () => {
                                     {   
                                         
                                         isSwishVisable && (
-                                            <Form form={form} layout="vertical" validateMessages={validateMessages} name="dynamic_rules" className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}}  label="Phone Number" rules={[{ required: true}]}>
+                                            <Form form={form} 
+                                            layout="vertical" 
+                                            validateMessages={validateMessages} 
+                                            name="dynamic_rules" 
+                                            className="flex-col centerY centerX paymentItem">
+                                                <Form.Item style={{width: "80%"}} label="Phone Number" rules={[{ required: true}]}>
                                                     <Input value={personalInfo[3].value}/> 
                                                 </Form.Item>
                                                 <Form.Item>
@@ -184,7 +218,11 @@ const CheckOut = () => {
                                     }
                                     {   
                                         isKlarnaVisable && (
-                                            <Form form={form} layout="vertical" validateMessages={validateMessages}  name="dynamic_rules" className="flex-col centerY centerX paymentItem">
+                                            <Form form={form} 
+                                            layout="vertical" 
+                                            validateMessages={validateMessages}  
+                                            name="dynamic_rules" 
+                                            className="flex-col centerY centerX paymentItem">
                                                 <Form.Item style={{width: "80%"}} label="Email" rules={[{ required: true}]}>
                                                     <Input value={personalInfo[2].value}/> 
                                                 </Form.Item>
@@ -196,7 +234,13 @@ const CheckOut = () => {
                                     }
                                     {   
                                         isCreditVisable && (
-                                            <Form form={form} layout="vertical" validateMessages={validateMessages} name="dynamic_rules" className="flex-col centerY centerX paymentItem">
+                                            <Form form={form} 
+                                            layout="vertical" 
+                                            validateMessages={validateMessages}
+                                            onFieldsChange={(_, allFields) => onChangePayment(allFields)} 
+                                            fields={paymentInfo}  
+                                            name="dynamic_rules" 
+                                            className="flex-col centerY centerX paymentItem">
                                                 <Form.Item style={{width: "80%"}} name="Full Name" label="Full Name" rules={[{ required: true}]}>
                                                     <Input/> 
                                                 </Form.Item>
@@ -261,10 +305,8 @@ const CheckOut = () => {
                                         )
                                     }
                                 </div>
-                                <div className="flex centerY centerX">
-                                    <Link to="/confirm">                                        
-                                        <Button type="primary" htmlType="submit">Place order</Button>
-                                    </Link>
+                                <div className="flex centerY centerX">                                      
+                                    <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                 </div>
 
                                     </>

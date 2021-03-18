@@ -1,10 +1,10 @@
 
-import React, { Component, ContextType, CSSProperties } from "react";
-import { ArrowRightOutlined } from "@ant-design/icons";
+import React, { Component, ContextType } from "react";
+
 import { Button } from "antd";
 import { CartContext } from "../context/CartContext";
 import { CloseOutlined } from "@ant-design/icons";
-import shopImg from "../images/shop-img.jpg";
+
 import "../css/cart.css";
 import "../css/layout.css";
 import { Link } from "react-router-dom";

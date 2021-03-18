@@ -1,18 +1,24 @@
-import { Component, ContextType, useDebugValue } from "react";
+import { Component, ContextType} from "react";
 import { CartContext } from "../context/CartContext";
 import "../css/layout.css";
-import { Button, Result } from "antd";
-import { PersonalData } from "./checkOut";
+import { Result } from "antd";
+
 
 interface State {
     confirmArray: any[],
-    isLoading: boolean,
+    isLoading: boolean
 }
 
-export async function mockApi(values: {}) {
+export async function mockApi(personalInfo: any) {
     await timeOut()
-    console.log(values)
-    return values
+    console.log("firstname: "+ personalInfo[0].value)
+    console.log("lastname: " + personalInfo[1].value)
+    console.log("email: " + personalInfo[2].value)
+    console.log("phone: " + personalInfo[3].value)
+    console.log("adress: " + personalInfo[4].value)
+
+
+    return true
 }
 
 async function timeOut() {
@@ -25,26 +31,20 @@ class Confirm extends Component<{}, State> {
 
     state: State = {
         confirmArray: [],
-        isLoading: true,
-      
+        isLoading: true
     
     }
 
     async componentDidMount() {
-        const res = await mockApi({
-            firstname: "",
-            lastname: "",
-            email: "",
-            phone: "", 
-            adress: "",
-        })
-        console.log(res)
-
 
         this.setState({
             confirmArray: [...this.context.cart],
             isLoading: false
         })
+
+        this.context.cart = []
+        // console.log(this.context.cart)
+        // console.log(this.state.confirmArray)
     }
 
 
@@ -53,7 +53,6 @@ class Confirm extends Component<{}, State> {
         
         const orderNumber = Math.floor(Math.random() * 1000000)
         
-
         const confirmArray = this.state.confirmArray;
 
         return (
@@ -73,7 +72,6 @@ class Confirm extends Component<{}, State> {
                             <h2>
                                 {item.productName} x
                                 {item.count}
-                                {/* {this.state.personalData[0].name} */}
                             </h2>
                         </div>
                     ))

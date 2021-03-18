@@ -74,7 +74,6 @@ class DataProvider extends Component<{}, State> {
         const error = () => {
             message.error('The product has been deleted', 2);
           };
-        // if(window.confirm("Do you wanna delete this product")) {
             const { cart } = this.state;
             cart.forEach((item, index) => {
                 if(item.productName === id) {
