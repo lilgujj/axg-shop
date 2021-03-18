@@ -126,14 +126,6 @@ const CheckOut = () => {
             
         }
 
-        
-
-
-
-
-
-
-
     return(
         <div className="formContainer flex centerY centerX"> 
             <div className="form flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
