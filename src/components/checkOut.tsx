@@ -1,14 +1,16 @@
 import { Button, Form, Input, Radio } from "antd";
-import  { useContext, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import shopImg from "../images/shop-img.jpg";
 import "../css/layout.css"
 import "../css/checkOut.css"
 import { CartContext } from "../context/CartContext";
 import React from "react";
+import { Link } from "react-router-dom";
+import Confirm from "./confirm";
 
 
 
-interface PersonalData {
+export interface PersonalData {
     name: string | number | (string | number)[];
     value?: any;
     touched?: boolean;
@@ -17,28 +19,37 @@ interface PersonalData {
   }
 
   
-  const CheckOut = () => {
+  
+export async function mockApi(personalInfo: PersonalData[]) {
+    await timeOut()
+    return personalInfo
+}
 
-        const validateMessages = {
-            required: '${label} is required!',
-            types: {
-                email: '${label} is not a valid email!',
-                number: '${label} is not a valid number!',
-            }
-        };
-        const [form] = Form.useForm();
-
-        const [isProceedValid, setProceed] = useState(false)
-
-        const onCheck = async () => {
-          try {
-            const values = await form.validateFields();
-            console.log('Success:', values);
-            setProceed(!isProceedValid);
-          } catch (errorInfo) {
-            console.log('Failed:', errorInfo);
-          }
-        };
+async function timeOut() {
+    return new Promise(resolve => setTimeout(resolve, 2000))
+}
+const CheckOut = () => {
+    
+    const validateMessages = {
+        required: '${label} is required!',
+        types: {
+            email: '${label} is not a valid email!',
+            number: '${label} is not a valid number!',
+        }
+    };
+    const [form] = Form.useForm();
+    
+    const [isProceedValid, setProceed] = useState(false)
+    
+    const onCheck = async () => {
+      try {
+        const values = await form.validateFields();
+        console.log('Success:', values);
+        setProceed(!isProceedValid);
+      } catch (errorInfo) {
+        console.log('Failed:', errorInfo);
+      }
+    };
 
         const [isSecondProceedValid, setSecondProceed] = useState(false);
 
@@ -105,7 +116,7 @@ interface PersonalData {
         const [isDhlVisable, setDhl] = useState(false)
 
         const showDhl = () => {
-            setDhl(!isKlarnaVisable)
+            setDhl(!isDhlVisable)
             setPostNord(false)
             setSchenker(false)
             
@@ -124,7 +135,12 @@ interface PersonalData {
         const onChangePersonal = (allFields: any) => {
             setFields(allFields)
         }
-        
+
+
+
+
+
+
     return(
         <div className="formContainer flex centerY centerX"> 
             <div className="form flex-col centerY centerX" style={{marginTop: "5rem", marginBottom: "1rem"}}>
@@ -261,7 +277,9 @@ interface PersonalData {
                                     }
                                 </div>
                                 <div className="flex centerY centerX">
-                                    <Button type="primary" htmlType="submit">Place order</Button>           
+                                    <Link to="/confirm">                                        
+                                        <Button type="primary" htmlType="submit">Place order</Button>
+                                    </Link>
                                 </div>
 
                                     </>

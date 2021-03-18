@@ -6,9 +6,9 @@ import  "../css/layout.css"
 import { Footer } from "antd/lib/layout/layout";
 import { Route, Switch } from "react-router";
 import Shop from "./Shop";
-import ShoppingCartSidebar from './Cart'
+import ShoppingCartSidebar from './Cart';
 import CheckOut from "./checkOut";
-
+import Confirm from "./confirm";
 
 class Layout extends Component {
 
@@ -30,11 +30,14 @@ class Layout extends Component {
                     <Route path="/checkout">
                         <CheckOut />
                     </Route>
+                    <Route path="/cart">
+                        <ShoppingCartSidebar />
+                    </Route>
+                    <Route path="/confirm">
+                      <Confirm />
+                    </Route>
 
 
-                <Route path="/cart">
-                <ShoppingCartSidebar />
-                </Route>
                 </Switch>
                 <Footer style={{textAlign: "center"}}>
                     Anton X Gustav <br />clothing
