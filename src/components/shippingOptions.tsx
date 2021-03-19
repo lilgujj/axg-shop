@@ -25,7 +25,7 @@ class ShippingOptions extends Component<Props> {
                 <h2>{this.props.name}</h2>
                 <h2>{this.props.price}kr</h2>
                 <p>{cart.total} + {this.props.price}kr</p>
-                <h3 style={{ color: 'red' }}>Total: {cart.total} + {this.props.price}kr</h3>
+                <h3 style={{ color: 'red' }}>Total: {cart.total + this.props.price}kr</h3>
                 
             </div>
         );

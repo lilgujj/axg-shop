@@ -38,22 +38,11 @@ const CheckOut = () => {
             const values = await form.validateFields();
             console.log('Success:', values);
             setProceed(!isProceedValid);
+            sendMock();
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }
         };
-
-        const [isSecondProceedValid, setSecondProceed] = useState(false);
-
-        const onSecondCheck = async () => {
-            try {
-            const values = await form.validateFields();
-            console.log('Success:', values);
-            setSecondProceed(!isSecondProceedValid);
-          } catch (errorInfo) {
-            console.log('Failed:', errorInfo);
-          }
-        }
 
         const cart = useContext(CartContext)
 
@@ -73,9 +62,6 @@ const CheckOut = () => {
             {
                 name: ['phone'], value: ''
             },
-        ]);
-
-        const [paymentInfo, setPayment] = useState([
             {
                 name: ['Full Name'], value: ''
             },
@@ -87,15 +73,13 @@ const CheckOut = () => {
             },
             {
                 name: ['CVC'], value: ''
-            }
-        ])
+            },
+            
+        ]);
+
 
         const onChangePersonal = (allFields: any) => {
             setFields(allFields)
-        }
-
-        const onChangePayment = (allFields: any) => {
-            setPayment(allFields)
         }
 
         
@@ -156,7 +140,6 @@ const CheckOut = () => {
             
         }
 
-
         if(isBookingFinished){
            return <Redirect to="/confirm" />
         }
@@ -167,9 +150,9 @@ const CheckOut = () => {
                 <div style={{margin: ".5rem 0", width: "100%"}}>
 
                 <Form form={form} layout="vertical" name="dynamic_rules" className="formInfo flex-col centerY centerX payment" 
-                fields={personalInfo} 
-                onFieldsChange={(_, allFields) => onChangePersonal(allFields)} 
-                validateMessages={validateMessages}>
+                    fields={personalInfo} 
+                    onFieldsChange={(_, allFields) => onChangePersonal(allFields)} 
+                    validateMessages={validateMessages}>
                 
                     <h3 style={{paddingTop: "1rem"}}>Personal Information</h3>
                     
@@ -188,144 +171,125 @@ const CheckOut = () => {
                     <Form.Item style={{width: "80%"}} name="adress" label="Adress" rules={[{ required: true}]}>
                         <Input/>
                     </Form.Item>
-                    <Form.Item>
-                        <Button  onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+
+                    <Form.Item
+                        name="Payment Method"
+                        rules={[{ required: true, message: 'Please pick an item!' }]}
+                         label="Payment Method"
+                     >
+                        <Radio.Group 
+                        className="flex centerX centerY"
+                        
+                        >
+                            <div className="radioBtn">
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showSwish} value="Swish">Swish</Radio.Button>
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showKlarna}  value="Klarna">Klarna</Radio.Button>
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showCreditCard}  value="Credit Card">Credit Card</Radio.Button>
+                            </div>
+                        </Radio.Group>
                     </Form.Item>
-                </Form>
-  
+
                     {
-                        isProceedValid &&(
+                        
+                        isSwishVisable && (
+                            
+                            <Form.Item style={{width: "80%"}} label="Phone Number" rules={[{ required: true}]}>
+                                <Input value={personalInfo[3].value}/>
+                            </Form.Item>
+
+                        ) 
+                    }
+
+                    { isKlarnaVisable && (
+
+                            <Form.Item style={{width: "80%"}} label="Email" rules={[{ required: true}]}>
+                                <Input value={personalInfo[2].value}/> 
+                            </Form.Item>
+                        )
+                    }
+
+                    {   isCreditVisable && (
+                        <>
+                            <Form.Item style={{width: "80%"}} name="Full Name" label="Full Name" rules={[{ required: true}]}>
+                                <Input/> 
+                            </Form.Item>
+                            <Form.Item style={{width: "80%"}} name="Card Number" label="Card Number" rules={[{ required: true}]}>
+                                <Input/> 
+                            </Form.Item>
+                            <div className="flex centerX centerY">
+                                <Form.Item style={{width: "80%"}} name="MM/YY" label="MM / YY" rules={[{ required: true}]}>
+                                    <Input/> 
+                                </Form.Item>
+                                <Form.Item style={{width: "80%"}} name="CVC" label="CVC" rules={[{ required: true}]}>
+                                    <Input/> 
+                                </Form.Item>
+                            </div>
+                        </>
+                        )
+                    }
+
+                    <Form.Item
+                    
+                    name="Shipping"
+                    rules={[{ required: true, message: 'Please pick an item!' }]}
+                     label="Payment Method">
+                        <Radio.Group >
+                            <div className="radioBtn">
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="PostNord 59kr">PostNord
+                                </Radio.Button>            
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="DHL 79kr">DHL
+                                </Radio.Button>
+                                <Radio.Button style={{margin: ".5rem"}} onClick={showSchenker} value="Schenker 99kr">Schenker
+                                </Radio.Button>
+                            </div>
+                        </Radio.Group>
+                    </Form.Item>
+                    
+                    { isPostNordVisable && (
+                        <>
+                        <ShippingOptions name="PostNord" price={59}/>
+
+                       <Form.Item>
+                            <Button onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+                       </Form.Item>
+                        </>
+                        )
+                    }
+
+                    {
+                        isDhlVisable && (
                             <>
-                                <div className="flex-col centerX centerY payment">
-                                    <Radio.Group className="flex centerX centerY">
-                                        <div className="radioBtn">
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showSwish} value="a">Swish</Radio.Button>
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showKlarna} value="b">Klarna</Radio.Button>
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showCreditCard} value="c">Credit Card</Radio.Button>
-                                        </div>
-                                    </Radio.Group>
-                                    {   
-                                        
-                                        isSwishVisable && (
-                                            <Form form={form} 
-                                            layout="vertical" 
-                                            validateMessages={validateMessages} 
-                                            name="dynamic_rules" 
-                                            className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} label="Phone Number" rules={[{ required: true}]}>
-                                                    <Input value={personalInfo[3].value}/> 
-                                                </Form.Item>
-                                                <Form.Item>
-                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
-                                                </Form.Item>
-                                            </Form>
-                                        )
-                                    }
-                                    {   
-                                        isKlarnaVisable && (
-                                            <Form form={form} 
-                                            layout="vertical" 
-                                            validateMessages={validateMessages}  
-                                            name="dynamic_rules" 
-                                            className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} label="Email" rules={[{ required: true}]}>
-                                                    <Input value={personalInfo[2].value}/> 
-                                                </Form.Item>
-                                                <Form.Item>
-                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
-                                                </Form.Item>
-                                            </Form>
-                                        )
-                                    }
-                                    {   
-                                        isCreditVisable && (
-                                            <Form form={form} 
-                                            layout="vertical" 
-                                            validateMessages={validateMessages}
-                                            onFieldsChange={(_, allFields) => onChangePayment(allFields)} 
-                                            fields={paymentInfo}  
-                                            name="dynamic_rules" 
-                                            className="flex-col centerY centerX paymentItem">
-                                                <Form.Item style={{width: "80%"}} name="Full Name" label="Full Name" rules={[{ required: true}]}>
-                                                    <Input/> 
-                                                </Form.Item>
-                                                <Form.Item style={{width: "80%"}} name="Card Number" label="Card Number" rules={[{ required: true}]}>
-                                                    <Input/> 
-                                                </Form.Item>
-                                                <div className="flex centerX centerY">
-                                                    <Form.Item style={{width: "80%"}} name="MM/YY" label="MM / YY" rules={[{ required: true}]}>
-                                                        <Input/> 
-                                                    </Form.Item>
-                                                    <Form.Item style={{width: "80%"}} name="CVC" label="CVC" rules={[{ required: true}]}>
-                                                        <Input/> 
-                                                    </Form.Item>
-                                                </div>
-                                                <Form.Item>
-                                                    <Button type="primary" htmlType="submit" onClick={onSecondCheck}>Proceed</Button>
-                                                </Form.Item>
-                                            </Form>
-                                        )
-                                    }
-                                </div>
-            
-                                {
-                                    isSecondProceedValid && (
-                                        <>
-                                <div className="payment flex-col centerY centerX">
-                                    <Radio.Group >
-                                        <div className="radioBtn">
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="a">PostNord</Radio.Button>
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="b">DHL</Radio.Button>
-                                            <Radio.Button style={{margin: ".5rem"}} onClick={showSchenker} value="c">Schenker</Radio.Button>
-                                        </div>
-                                    </Radio.Group>
-                                    {   
-                                        isPostNordVisable && (
-                                            <div className="flex-col centerY centerX">
-                                                <ShippingOptions 
-                                                name="PostNord" 
-                                                price={59}
-                                                />
-                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
-                                            </div>
-                                            )
-                                    }
-                                    {   
-                                        isDhlVisable && ( 
-                                            <div className="flex-col centerY centerX">
-                                                <ShippingOptions 
-                                                    name="DHL"
-                                                    price={79}                                     
-                                                    />
-                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
-                                            </div> 
-                                            )
-                                    }
-                                    {   
-                                        isSchenkerVisable && (
-                                            <div className="flex-col centerY centerX">
-                                                <ShippingOptions 
-                                                    name="Schenker"
-                                                    price={99}
-                                                />
-                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
+                                <ShippingOptions name="DHL" price={79}/>
 
-                                            </div>
-                                        )
-                                    }
-                                </div>
-
-                                    </>
-                                    )
-                                }
-
+                                <Form.Item>
+                                    <Button  onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+                                </Form.Item>
                             </>
                         )
                     }
+
+                    { isSchenkerVisable && (
+                        <>
+                            <ShippingOptions name="Schenker" price={99}/>
+
+                            <Form.Item>
+                                    <Button onClick={onCheck} type="primary" htmlType="submit">
+                                        Proceed
+                                    </Button>
+                            </Form.Item>
+                       </>
+                    )
+
+                    }
+
+                    
+                </Form>
                 </div>
             </div>
         </div>
-    )
+            )
 }
+
+
 
 export default CheckOut
