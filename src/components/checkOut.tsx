@@ -1,11 +1,10 @@
 import { Button, Form, Input, Radio } from "antd";
-import  React, { useContext, useState } from "react";
+import  React, { useState } from "react";
 import "../css/layout.css"
 import "../css/checkOut.css"
-import { CartContext } from "../context/CartContext";
 
 import {  Redirect } from "react-router-dom";
-import { mockApi } from "./confirm";
+import { mockApi } from "../mockApi";
 import ShippingOptions from "./shippingOptions";
 
 
@@ -38,13 +37,17 @@ const CheckOut = () => {
             const values = await form.validateFields();
             setProceed(!isProceedValid);
 
-            let res = await mockApi(values)
+            await mockApi(values)
             setFinish(true)
+
+
+         
             
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }
     };
+    
     
         const onChangePersonal = (allFields: any) => {
             setFields(allFields)
@@ -206,15 +209,15 @@ const CheckOut = () => {
                             <Form.Item style={{width: "80%"}} name="Full Name" label="Full Name" rules={[{ required: true}]}>
                                 <Input/> 
                             </Form.Item>
-                            <Form.Item style={{width: "80%"}} name="Card Number" label="Card Number" rules={[{ required: true}]}>
-                                <Input/> 
+                            <Form.Item style={{width: "80%"}} name="Card Number" label="Card Number" rules={[{ required: true }]}>
+                                <Input max={10}/> 
                             </Form.Item>
                             <div className="flex centerX centerY">
                                 <Form.Item style={{width: "80%"}} name="MM/YY" label="MM / YY" rules={[{ required: true}]}>
-                                    <Input/> 
+                                    <Input max={3}/> 
                                 </Form.Item>
                                 <Form.Item style={{width: "80%"}} name="CVC" label="CVC" rules={[{ required: true}]}>
-                                    <Input/> 
+                                    <Input max={3}/> 
                                 </Form.Item>
                             </div>
                         </>
@@ -243,7 +246,7 @@ const CheckOut = () => {
                         <ShippingOptions name="PostNord" price={59}/>
 
                        <Form.Item>
-                            <Button onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+                            <Button onClick={onCheck} type="primary" htmlType="submit">Place Order</Button>
                        </Form.Item>
                         </>
                         )
@@ -255,7 +258,8 @@ const CheckOut = () => {
                                 <ShippingOptions name="DHL" price={79}/>
 
                                 <Form.Item>
-                                    <Button  onClick={onCheck} type="primary" htmlType="submit">Proceed</Button>
+                                    <Button  onClick={onCheck} type="primary" htmlType="submit">Place Order
+                                    </Button>   
                                 </Form.Item>
                             </>
                         )
@@ -266,16 +270,19 @@ const CheckOut = () => {
                             <ShippingOptions name="Schenker" price={99}/>
 
                             <Form.Item>
-                                    <Button onClick={onCheck} type="primary" htmlType="submit">
-                                        Proceed
+                                    <Button 
+                                        onClick={onCheck} 
+                                        type="primary" 
+                                        htmlType="submit"
+                                        >
+                                        Place Order
                                     </Button>
                             </Form.Item>
                        </>
                     )
 
                     }
-
-                    
+     
                 </Form>
                 </div>
             </div>

@@ -3,23 +3,11 @@ import { CartContext } from "../context/CartContext";
 import "../css/layout.css";
 import { Result } from "antd";
 
-
 interface State {
     confirmArray: any[],
     isLoading: boolean
 }
 
-export async function mockApi(values: any) {
-
-    await timeOut()
-    console.log("Form Informaion: " + values)
-
-    return true
-}
-
-async function timeOut() {
-    return new Promise(resolve => setTimeout(resolve, 2000))
-}
 
 class Confirm extends Component<{}, State> {
     context!: ContextType<typeof CartContext>;

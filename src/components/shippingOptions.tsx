@@ -1,4 +1,3 @@
-import { ConsoleSqlOutlined } from "@ant-design/icons";
 import { Component, ContextType } from "react";
 import {CartContext} from "../context/CartContext";
 
