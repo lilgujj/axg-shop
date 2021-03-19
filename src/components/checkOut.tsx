@@ -36,15 +36,19 @@ const CheckOut = () => {
         const onCheck = async () => {
         try {
             const values = await form.validateFields();
-            console.log('Success:', values);
             setProceed(!isProceedValid);
-            sendMock();
+
+            let res = await mockApi(values)
+            setFinish(true)
+            
         } catch (errorInfo) {
             console.log('Failed:', errorInfo);
         }
-        };
-
-        const cart = useContext(CartContext)
+    };
+    
+        const onChangePersonal = (allFields: any) => {
+            setFields(allFields)
+        }
 
         const [personalInfo, setFields] = useState([
             { 
@@ -78,22 +82,11 @@ const CheckOut = () => {
         ]);
 
 
-        const onChangePersonal = (allFields: any) => {
-            setFields(allFields)
-        }
 
-        
-        const sendMock = async () => {
-            let res = await mockApi(personalInfo)
-            console.log(res)
-            setFinish(true)
-        }
-    
         const [isBookingFinished, setFinish] = useState(false);
+ 
 
         const [isSwishVisable, setSwish] = useState(false)
-
-        
 
         const showSwish = () => {
             setSwish(!isSwishVisable)

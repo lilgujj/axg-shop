@@ -9,14 +9,10 @@ interface State {
     isLoading: boolean
 }
 
-export async function mockApi(personalInfo: any) {
-    await timeOut()
-    // console.log("firstname: "+ personalInfo[0].value)
-    // console.log("lastname: " + personalInfo[1].value)
-    // console.log("email: " + personalInfo[2].value)
-    // console.log("phone: " + personalInfo[3].value)
-    // console.log("adress: " + personalInfo[4].value)
+export async function mockApi(values: any) {
 
+    await timeOut()
+    console.log("Form Informaion: " + values)
 
     return true
 }
