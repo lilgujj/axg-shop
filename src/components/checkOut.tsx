@@ -108,6 +108,8 @@ const CheckOut = () => {
 
         const [isSwishVisable, setSwish] = useState(false)
 
+        
+
         const showSwish = () => {
             setSwish(!isSwishVisable)
             setKlarna(false)
@@ -281,6 +283,8 @@ const CheckOut = () => {
                                                 <h2>Shipping price: 59kr</h2>
                                                 <p>{cart.total}kr + 59kr</p>
                                                 <h3 style={{ color: 'red' }}>Total: {cart.total + 59}kr</h3>
+                                            
+                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                             </div>
                                             )
                                     }
@@ -291,6 +295,7 @@ const CheckOut = () => {
                                                 <h2>Shipping price: 79kr</h2>
                                                 <p>{cart.total}kr + 79kr</p>
                                                 <h3 style={{ color: 'red' }}>Total: {cart.total + 79}kr</h3>
+                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                             </div> 
                                             )
                                     }
@@ -301,12 +306,11 @@ const CheckOut = () => {
                                                 <h2>Shipping price: 99kr</h2>
                                                 <p>{cart.total}kr + 99kr</p>
                                                 <h3 style={{ color: 'red' }}>Total: {cart.total + 99}kr</h3>
+                                                <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
+
                                             </div>
                                         )
                                     }
-                                </div>
-                                <div className="flex centerY centerX">                                      
-                                    <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                 </div>
 
                                     </>

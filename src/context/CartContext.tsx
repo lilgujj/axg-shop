@@ -78,7 +78,9 @@ class DataProvider extends Component<{}, State> {
             cart.forEach((item, index) => {
                 if(item.productName === id) {
                     cart.splice(index, 1)
+                
                 } 
+         
             
                 })
                 this.setState({ cart: cart })
