@@ -66,9 +66,9 @@ class Confirm extends Component<{}, State> {
                     />
                     <p style={{ color: 'grey' }}>Your order number: {orderNumber}</p>
                 {
-                    confirmArray.map((item) => ( 
+                    this.context.cart.map((item) => ( 
                         
-                        <div className="flex centerY centerX">
+                        <div  className="flex centerY centerX">
                             <h2>
                                 {item.productName} x
                                 {item.count}

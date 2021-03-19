@@ -1,11 +1,12 @@
 import { Button, Form, Input, Radio } from "antd";
-import  { useContext, useState } from "react";
+import  React, { useContext, useState } from "react";
 import "../css/layout.css"
 import "../css/checkOut.css"
 import { CartContext } from "../context/CartContext";
 
 import {  Redirect } from "react-router-dom";
 import { mockApi } from "./confirm";
+import ShippingOptions from "./shippingOptions";
 
 
 
@@ -97,7 +98,7 @@ const CheckOut = () => {
             setPayment(allFields)
         }
 
-
+        
         const sendMock = async () => {
             let res = await mockApi(personalInfo)
             console.log(res)
@@ -154,6 +155,8 @@ const CheckOut = () => {
             setDhl(false)
             
         }
+
+
         if(isBookingFinished){
            return <Redirect to="/confirm" />
         }
@@ -269,7 +272,7 @@ const CheckOut = () => {
                                     isSecondProceedValid && (
                                         <>
                                 <div className="payment flex-col centerY centerX">
-                                    <Radio.Group>
+                                    <Radio.Group >
                                         <div className="radioBtn">
                                             <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="a">PostNord</Radio.Button>
                                             <Radio.Button style={{margin: ".5rem"}} onClick={showDhl} value="b">DHL</Radio.Button>
@@ -279,11 +282,10 @@ const CheckOut = () => {
                                     {   
                                         isPostNordVisable && (
                                             <div className="flex-col centerY centerX">
-                                                <h2>PostNord</h2>
-                                                <h2>Shipping price: 59kr</h2>
-                                                <p>{cart.total}kr + 59kr</p>
-                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 59}kr</h3>
-                                            
+                                                <ShippingOptions 
+                                                name="PostNord" 
+                                                price={59}
+                                                />
                                                 <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                             </div>
                                             )
@@ -291,10 +293,10 @@ const CheckOut = () => {
                                     {   
                                         isDhlVisable && ( 
                                             <div className="flex-col centerY centerX">
-                                                <h2>DHL</h2>
-                                                <h2>Shipping price: 79kr</h2>
-                                                <p>{cart.total}kr + 79kr</p>
-                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 79}kr</h3>
+                                                <ShippingOptions 
+                                                    name="DHL"
+                                                    price={79}                                     
+                                                    />
                                                 <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
                                             </div> 
                                             )
@@ -302,10 +304,10 @@ const CheckOut = () => {
                                     {   
                                         isSchenkerVisable && (
                                             <div className="flex-col centerY centerX">
-                                                <h2>Schenker</h2>
-                                                <h2>Shipping price: 99kr</h2>
-                                                <p>{cart.total}kr + 99kr</p>
-                                                <h3 style={{ color: 'red' }}>Total: {cart.total + 99}kr</h3>
+                                                <ShippingOptions 
+                                                    name="Schenker"
+                                                    price={99}
+                                                />
                                                 <Button onClick={sendMock} type="primary" htmlType="submit">Place order</Button>
 
                                             </div>
