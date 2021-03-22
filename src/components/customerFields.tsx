@@ -1,7 +1,6 @@
 import { Form, Input } from "antd";
 
 
-
 function CustomerFields() {
     return (
         <>
