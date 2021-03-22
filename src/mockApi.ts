@@ -6,7 +6,6 @@ export async function mockApi(values: any) {
 
     await timeOut()
     console.log("Form information:", values)
-    
     return true
 }
 
