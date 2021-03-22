@@ -53,10 +53,12 @@ class Cart extends Component<Props> {
   
               {cart.map((item, index) => (
                 <div key={index} className="cartItems flex centerY centerX space-evenly">
+                  <div>
                     <img className="cartItemImage" src={item.img} alt="" />
                     <div className="flex-col cartItemText">
                       <p className="itemText">{item.productName}</p>
                     <div />
+                  </div>
                 </div>
                     <p style={{ color: "red" }}>{item.price * item.count}kr</p>
                   <div className="flex centerY centerX count-div">
