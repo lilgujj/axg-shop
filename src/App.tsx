@@ -11,11 +11,11 @@ function App() {
 
       <Suspense fallback={<h2>Error</h2>}>
 
-      <BrowserRouter>
-        <div style={{ minHeight: '100%' }}>
-          <Layout  />
-        </div>
-      </BrowserRouter>
+        <BrowserRouter>
+          <div style={{ minHeight: '100%' }}>
+            <Layout  />
+          </div>
+        </BrowserRouter>
 
       </Suspense>
 
