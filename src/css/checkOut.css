@@ -36,5 +36,9 @@
     .radioBtn {
         flex-direction: column;
     }
+    .customerField {
+        flex-direction: column;
+        width: 100%
+    }
 
 }

@@ -44,21 +44,21 @@ function ShippingFields(props: Props) {
                   <Radio.Button
                     style={{ margin: ".5rem" }}
                     onClick={showPostNord}
-                    value="PostNord 59kr"
+                    value="PostNord 59kr 8-12 dagar leveranstid"
                   >
                     PostNord
                   </Radio.Button>
                   <Radio.Button
                     style={{ margin: ".5rem" }}
                     onClick={showDhl}
-                    value="DHL 79kr"
+                    value="DHL 79kr 6-8 dagar leveranstid"
                   >
                     DHL
                   </Radio.Button>
                   <Radio.Button
                     style={{ margin: ".5rem" }}
                     onClick={showSchenker}
-                    value="Schenker 99kr"
+                    value="Schenker 99kr 3-5 dagar leveranstid"
                   >
                     Schenker
                   </Radio.Button>
@@ -68,7 +68,7 @@ function ShippingFields(props: Props) {
 
             {isPostNordVisable && (
               <>
-                <ShippingOptions name="PostNord" price={59} />
+                <ShippingOptions time="8-12 dagar leveranstid" name="PostNord" price={59} />
 
                 <Form.Item>
                   <Button onClick={props.check} type="primary" htmlType="submit">
@@ -80,7 +80,7 @@ function ShippingFields(props: Props) {
 
             {isDhlVisable && (
               <>
-                <ShippingOptions name="DHL" price={79} />
+                <ShippingOptions time="6-8 dagar leveranstid" name="DHL" price={79} />
 
                 <Form.Item>
                   <Button onClick={props.check} type="primary" htmlType="submit">
@@ -92,7 +92,7 @@ function ShippingFields(props: Props) {
 
             {isSchenkerVisable && (
               <>
-                <ShippingOptions name="Schenker" price={99} />
+                <ShippingOptions time="3-5 dagar leveranstid" name="Schenker" price={99} />
 
                 <Form.Item>
                   <Button onClick={props.check} type="primary" htmlType="submit">

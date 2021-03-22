@@ -5,7 +5,7 @@ import {CartContext} from "../context/CartContext";
 interface Props {
     name: string,
     price: number,
-
+    time: string,
 }
 
 
@@ -22,6 +22,7 @@ class ShippingOptions extends Component<Props> {
         return (
             <div className="flex-col centerY centerX">
                 <h2>{this.props.name}</h2>
+                <h2>{this.props.time}</h2>
                 <h2>{this.props.price}kr</h2>
                 <p>{cart.total} + {this.props.price}kr</p>
                 <h3 style={{ color: 'red' }}>Total: {cart.total + this.props.price}kr</h3>

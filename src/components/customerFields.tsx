@@ -1,5 +1,5 @@
 import { Form, Input } from "antd";
-
+import "../css/checkOut.css"
 
 function CustomerFields() {
     return (
@@ -38,14 +38,27 @@ function CustomerFields() {
             >
               <Input />
             </Form.Item>
-            <Form.Item
-              style={{ width: "80%" }}
-              name="adress"
-              label="Adress"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
+            <div style={{ width: "100%" }} className="customerField flex centerX centerY">
+              <Form.Item
+                name="adress"
+                label="Adress"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item 
+                name="Zip Code"
+                label="Zip Code"
+                rules={[{ required: true }]}>
+                  <Input />
+              </Form.Item>
+              <Form.Item 
+                name="City"
+                label="City"
+                rules={[{ required: true }]}>
+                  <Input />
+              </Form.Item>
+            </div>
         </>
     )
 }
