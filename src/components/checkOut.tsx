@@ -82,12 +82,7 @@ const CheckOut = () => {
                 name: ['CVC'], value: ''
             },
             
-        ]);
-
-
-
-        const [isBookingFinished, setFinish] = useState(false);
- 
+        ]); 
 
         const [isSwishVisable, setSwish] = useState(false)
 
@@ -135,6 +130,8 @@ const CheckOut = () => {
             setDhl(false)
             
         }
+
+        const [isBookingFinished, setFinish] = useState(false);
 
         if(isBookingFinished){
            return <Redirect to="/confirm" />
