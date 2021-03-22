@@ -60,11 +60,5 @@
     background: #364d79;
     max-width: 80%;
     margin: auto;
-    objectFit: fill;
+    objectFit: cover;
   };
-
-@media(max-width: 40em) {
-    .newsContainer {
-        z-index: -100;
-    }
-}

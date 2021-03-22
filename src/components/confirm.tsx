@@ -26,7 +26,7 @@ class Confirm extends Component<{}, State> {
             isLoading: false
         })
 
-        this.context.cart = []
+        // this.context.cart = []
         // console.log(this.context.cart)
         // console.log(this.state.confirmArray)
     }
@@ -50,9 +50,8 @@ class Confirm extends Component<{}, State> {
                     />
                     <p style={{ color: 'grey' }}>Your order number: {orderNumber}</p>
                 {
-                    this.context.cart.map((item) => ( 
-                        
-                        <div  className="flex centerY centerX">
+                    this.context.cart.map((item, index) => ( 
+                        <div key={index} className="flex centerY centerX">
                             <h2>
                                 {item.productName} x
                                 {item.count}

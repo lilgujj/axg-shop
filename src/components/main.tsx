@@ -29,7 +29,7 @@ class Main extends Component {
                     <div className="newReleases">
                         <h2>New releases</h2>
                     </div>
-                <Carousel autoplay style={{zIndex: 100}} >
+                <Carousel autoplay >
                     <Link to="/shop/product/Pink%20Lady%20Glasses">
                         <div className="textHover flex centerX" >
                             <h3 className="textStyle"> Show More info</h3>

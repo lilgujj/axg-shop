@@ -51,17 +51,14 @@ class Cart extends Component<Props> {
                 <li>QTY</li>
               </ul>
   
-              {cart.map((item) => (
-                <div className="cartItems flex centerY centerX space-evenly">
-                  <div>
+              {cart.map((item, index) => (
+                <div key={index} className="cartItems flex centerY centerX space-evenly">
                     <img className="cartItemImage" src={item.img} alt="" />
-                  <div className="flex-col cartItemText">
-                    <p className="itemText">{item.productName}</p>
+                    <div className="flex-col cartItemText">
+                      <p className="itemText">{item.productName}</p>
                     <div />
-                  </div>
-                  </div>
+                </div>
                     <p style={{ color: "red" }}>{item.price * item.count}kr</p>
-  
                   <div className="flex centerY centerX count-div">
                     <Button
                       onClick={() => this.context.decrease(item.productName)}>
@@ -81,8 +78,7 @@ class Cart extends Component<Props> {
                         marginLeft: ".5rem",
                       }}
                     />
-                  </div>
-                          
+                  </div>   
               </div>
                      ))
               }
