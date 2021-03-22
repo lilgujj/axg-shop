@@ -5,7 +5,6 @@ import { Result } from "antd";
 
 interface State {
     confirmArray: any[],
-    isLoading: boolean
 }
 
 
@@ -15,42 +14,37 @@ class Confirm extends Component<{}, State> {
 
     state: State = {
         confirmArray: [],
-        isLoading: true
-    
     }
 
-    async componentDidMount() {
-
+    
+    componentDidMount() {
+        
+        const newArray = this.state.confirmArray.concat(...this.context.cart, this.state.confirmArray)
         this.setState({
-            confirmArray: [...this.context.cart],
-            isLoading: false
+            confirmArray: newArray,
+            
         })
-
-        // this.context.cart = []
-        // console.log(this.context.cart)
-        // console.log(this.state.confirmArray)
-    }
-
-
+        
+        this.context.emptyCart();
     
+    }
+ 
     render() {
         
         const orderNumber = Math.floor(Math.random() * 1000000)
         
-        const confirmArray = this.state.confirmArray;
-
+        
         return (
             
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', flexDirection: 'column' }}>
-            { this.state.isLoading === false &&(
-                <>
+            
                 <Result style={{padding: "0"}}
                     status="success"
                     title="Successfully Purchased"
                     />
                     <p style={{ color: 'grey' }}>Your order number: {orderNumber}</p>
                 {
-                    this.context.cart.map((item, index) => ( 
+                    this.state.confirmArray.map((item, index) => ( 
                         <div key={index} className="flex centerY centerX">
                             <h2>
                                 {item.productName} x
@@ -59,10 +53,7 @@ class Confirm extends Component<{}, State> {
                         </div>
                     ))
                 }
-                </>
-            ) 
-                
-            }
+            
             
             </div>
             

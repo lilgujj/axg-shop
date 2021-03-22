@@ -9,6 +9,7 @@ export const CartContext = createContext<ContextValue>({
     decrease: () => {},
     increase: () => {},
     getTotal: () => {},
+    emptyCart: () => {},
     cart:[],
     total: 0,
 });
@@ -28,6 +29,7 @@ interface ContextValue extends State {
     decrease: (id: string) => void;
     increase: (id: string) => void;
     getTotal: () => void;
+    emptyCart: () => void;
 }
 
 class DataProvider extends Component<{}, State> {
@@ -36,6 +38,12 @@ class DataProvider extends Component<{}, State> {
         cart: [],
         total: 0
      }
+
+    emptyCart = () => {
+        this.setState({
+            cart: []
+        })
+    }
 
 
      addProductToCart = (id: string) => {
@@ -121,6 +129,22 @@ class DataProvider extends Component<{}, State> {
         }, 0)
         this.setState({ total: total })
     }
+
+
+    componentDidUpdate = () => {
+        localStorage.setItem('cartProducts', JSON.stringify(this.state.cart))
+
+    }
+    componentDidMount = () => {
+        const res: any = localStorage.getItem('cartProducts')
+        const cartPruducts = JSON.parse(res);
+        if(cartPruducts !== null){
+            this.setState({
+                cart: cartPruducts
+            })
+
+        }
+    }
     
     
 
@@ -136,8 +160,8 @@ class DataProvider extends Component<{}, State> {
                 increase: this.increaseCount,
                 decrease: this.decreaseCount,
                 getTotal: this.getTotalPrice,
-            }
-            }>
+                emptyCart: this.emptyCart,
+            }}>
                 {this.props.children}
             </CartContext.Provider>
         )
