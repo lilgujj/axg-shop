@@ -225,7 +225,7 @@ const CheckOut = () => {
                     
                     name="Shipping"
                     rules={[{ required: true, message: 'Please pick an item!' }]}
-                     label="Payment Method">
+                     label="Shipping Method">
                         <Radio.Group >
                             <div className="radioBtn">
                                 <Radio.Button style={{margin: ".5rem"}} onClick={showPostNord} value="PostNord 59kr">PostNord
