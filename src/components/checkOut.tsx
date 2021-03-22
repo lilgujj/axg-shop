@@ -17,6 +17,7 @@ export interface PersonalData {
 }
 
 const CheckOut = () => {
+
   const validateMessages = {
     required: "required!",
     types: {
