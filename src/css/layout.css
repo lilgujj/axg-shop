@@ -4,6 +4,10 @@
     flex-direction: column;
 }
 
+.row {
+    flex-direction: row;
+}
+
 .flex {
     display: flex;
 }

@@ -1,5 +1,11 @@
+
+import CreditCardOutlined from "@ant-design/icons/lib/icons/CreditCardOutlined";
 import { Form, Input, Radio } from "antd";
 import React, { useState } from "react";
+import "../css/checkOut.css";
+import "../css/layout.css";
+import klarna from "../images/klarna.png"
+import swish from "../images/swish.png"
 
 interface Props {
     phoneNumber: any;
@@ -32,7 +38,7 @@ function PaymentFields(props: Props) {
     };
     
     return (
-    <div>
+    <div className="flex-col centerY centerX" style={{width: "80%"}}>
         <Form.Item
               name="Payment Method"
               rules={[{ required: true, message: "Please pick an item!" }]}
@@ -59,7 +65,8 @@ function PaymentFields(props: Props) {
                     onClick={showCreditCard}
                     value="Credit Card"
                   >
-                    Credit Card
+                    Credit Card 
+                    <CreditCardOutlined style={{margin: ".3rem"}}/>
                   </Radio.Button>
                 </div>
               </Radio.Group>
@@ -71,24 +78,33 @@ function PaymentFields(props: Props) {
                 label="Phone Number"
                 rules={[{ required: true }]}
               >
-                <Input value={props.phoneNumber} />
+                <div className="flex row centerY centerX">
+                  <Input value={props.phoneNumber} />
+                  <img src={swish} style={{height: "3rem"}} alt="swish logo"/>
+                </div>
+               
               </Form.Item>
             )}
 
             {isKlarnaVisable && (
-           
+            
               <Form.Item
+                className="flex row"
                 style={{ width: "80%" }}
                 label="Email"
                 rules={[{ required: true }]}
               >
-                <Input value={props.email} />
+                <div className="flex centerY centerX">
+                    <Input value={props.email} />
+                    <img src={klarna} style = {{ height: 'auto', width: '3rem', marginLeft: '.5rem' }} alt="" />
+
+                </div>
               </Form.Item>
            
             )}
             
             {isCreditVisable && (
-                <div>
+                <div className="flex-col centerY centerX" style={{width: "100%"}}>
                 <Form.Item
                   style={{ width: "80%" }}
                   name="Full Name"
