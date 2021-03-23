@@ -30,17 +30,21 @@ const CheckOut = () => {
 
   const [isProceedValid, setProceed] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+  
   const onCheck = async () => {
     try {
       const values = await form.validateFields();
       setProceed(!isProceedValid);
-
+      setLoading(!loading)
       await mockApi(values);
       setFinish(true);
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
     }
   };
+
+
 
   const onChangePersonal = (allFields: any) => {
     setFields(allFields);
@@ -110,7 +114,7 @@ const CheckOut = () => {
 
             <PaymentFields phoneNumber={personalInfo[3].value} email={personalInfo[2].value} />
 
-            <ShippingFields check={onCheck}/>
+            <ShippingFields check={onCheck} loading={loading}/>
                 
           </Form>
         </div>

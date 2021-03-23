@@ -1,10 +1,11 @@
-import { Button, Form, Radio } from "antd";
+import { Button, Form, Radio, Spin } from "antd";
 import { useState } from "react";
 import ShippingOptions from "./shippingOptions";
 
 
 interface Props {
     check: () => void;
+    loading: boolean;
 }
 
 function ShippingFields(props: Props) {
@@ -30,7 +31,6 @@ function ShippingFields(props: Props) {
       setPostNord(false);
       setDhl(false);
     };
-
 
     return (
         <>
@@ -71,9 +71,16 @@ function ShippingFields(props: Props) {
                 <ShippingOptions time="8-12 dagar leveranstid" name="PostNord" price={59} />
 
                 <Form.Item>
-                  <Button onClick={props.check} type="primary" htmlType="submit">
-                    Place Order
-                  </Button>
+                  { !props.loading && (
+                    <Button onClick={props.check} type="primary" htmlType="submit">
+                      Place Order
+                    </Button> 
+                    )
+                  }
+                  { props.loading && (
+                      <Spin />
+                    )
+                  }
                 </Form.Item>
               </>
             )}
@@ -83,9 +90,16 @@ function ShippingFields(props: Props) {
                 <ShippingOptions time="6-8 dagar leveranstid" name="DHL" price={79} />
 
                 <Form.Item>
-                  <Button onClick={props.check} type="primary" htmlType="submit">
-                    Place Order
-                  </Button>
+                  { !props.loading && (
+                    <Button onClick={props.check} type="primary" htmlType="submit">
+                      Place Order
+                    </Button> 
+                    )
+                  }
+                  { props.loading && (
+                      <Spin />
+                    )
+                  }
                 </Form.Item>
               </>
             )}
@@ -95,9 +109,16 @@ function ShippingFields(props: Props) {
                 <ShippingOptions time="3-5 dagar leveranstid" name="Schenker" price={99} />
 
                 <Form.Item>
-                  <Button onClick={props.check} type="primary" htmlType="submit">
-                    Place Order
-                  </Button>
+                  { !props.loading && (
+                    <Button onClick={props.check} type="primary" htmlType="submit">
+                      Place Order
+                    </Button> 
+                    )
+                  }
+                  { props.loading && (
+                      <Spin />
+                    )
+                  }
                 </Form.Item>
               </>
             )}
