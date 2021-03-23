@@ -2,7 +2,7 @@
 
 Developed with react and typescript to create an fully responsive e-commerce website.
 
-In this project [Ant Design](https://ant.design/)was used as design tool.
+In this project [Ant Design](https://ant.design/) was used as design tool.
 ## Run these commands when cloning this project
 
 First install all node dependencies, use:
