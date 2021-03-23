@@ -1,17 +1,34 @@
 .shopContainer {
     width: 100%;
     flex-wrap: wrap;
+    margin: 2rem 0;
+    min-height: 50vh;
 
 }
 
 .imageBack {
     position: absolute;
     z-index: -100;
-    height: 50vh;
+    height: 35vh;
     width: 100%;
     object-fit: cover;
     top: 0;
 
+}
+
+.shopTitle {
+    width: 100%;
+    height: 35vh;
+    color: white;
+}
+
+.shopH1 {
+    color: white;
+    font-size: 5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-bottom: 0;
+    
 }
 
 .shopItems {
@@ -22,5 +39,4 @@
 
 .produktImage {
     width: 20rem;
-    border-radius: 1rem;
 }

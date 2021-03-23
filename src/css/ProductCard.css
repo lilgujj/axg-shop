@@ -1,8 +1,23 @@
 
+
+.product-card {
+    width: 240px;
+    height: 280px;
+    margin: .5rem;
+}
+
+
 @media(max-width: 40em) {
 
     #zIndex {
         z-index: -100;
+        width: 150px;
+    }
+
+    .product-card {
+        width: 150px;
+        
+
     }
 
 }

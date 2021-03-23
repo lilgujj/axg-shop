@@ -18,15 +18,16 @@ class ProductCard extends Component <Props> {
         <Card
           id="zIndex"
           hoverable
-          style={{ width: 240, margin: ".5rem", borderRadius: "1rem" }}
+          className="product-card"
+          style={{ margin: ".5rem" }}
           cover={
-            <img style={{borderRadius: "1rem"}}
+            <img 
               alt="example"
               src={this.props.img}
             />
           }
           >
-            <Meta title={this.props.title} description={this.props.description} />
+            <Meta title={this.props.title} description={this.props.description + "kr"} />
         </Card>
       </div>
     );

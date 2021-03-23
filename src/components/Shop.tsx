@@ -18,7 +18,10 @@ class Shop extends Component {
         return(
             <>
                 <img className="imageBack" src={shopImg} alt=""/>
-                <h1 style={{ textAlign: 'center', marginTop: '30rem' }}>Shop</h1>
+                <div className="flex column centerY centerX shopTitle">
+                    <h1 className="shopH1">Shop</h1>
+
+                </div>
                 <div className="shopContainer flex centerY centerX">
                     <Switch>
                         <Route exact path="/shop">

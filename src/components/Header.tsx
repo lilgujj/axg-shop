@@ -1,6 +1,7 @@
 import React, { Component, ContextType } from "react";
 import '../css/headerStyle.css';
 import '../css/layout.css';
+import axgLogo from "../images/axg-logo.png"
 import { BarsOutlined, CloseOutlined, ShoppingCartOutlined, UserOutlined } from '@ant-design/icons';
 import {Link } from "react-router-dom";
 import { Badge } from 'antd';
@@ -61,7 +62,8 @@ class Header extends Component<Props, State> {
                                     <BarsOutlined onClick={this.menuToggle} style={{ fontSize: '2rem' }}/>
                                 </div>
                                 <Link className="linkStyle" to="/">
-                                    <h1 className="flex centerY"id="h1">A <span className="headerSpan">X</span> G</h1>
+                                    <img style={{ height: 'auto', width: '3rem' }} src={axgLogo} alt="" />
+                                    {/* <h1 className="flex centerY"id="h1">A <span className="headerSpan">X</span> G</h1> */}
                                 </Link>
 
                                 <ul id="ul" className={toggleNavbar ?  "toggle" : "" } > {/* Lägger till klassen toggle ifall this.state: true annars this.state: false och toggle tas bort*/}

@@ -62,12 +62,12 @@ class Cart extends Component<Props> {
                 </div>
                     <p style={{ color: "red" }}>{item.price * item.count}kr</p>
                   <div className="flex centerY centerX count-div">
-                    <Button
+                    <Button id="mobileBtn"
                       onClick={() => this.context.decrease(item.productName)}>
                       -
                     </Button>
                     <span style={{ margin: "0 .5rem" }}> {item.count}</span>
-                    <Button
+                    <Button id="mobileBtn"
                       onClick={() => this.context.increase(item.productName)}>
                       +
                     </Button>
@@ -75,7 +75,7 @@ class Cart extends Component<Props> {
                    <CloseOutlined
                       onClick={() => this.context.removeProduct(item.productName)}
                       style={{
-                        fontSize: "1rem",
+                        fontSize: ".5rem",
                         color: "red",
                         marginLeft: ".5rem",
                       }}

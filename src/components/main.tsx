@@ -4,6 +4,7 @@ import "../css/layout.css"
 import { Carousel } from 'antd';
 
 import mainMan from "../images/mainMan.jpg"
+import axgLogo from "../images/axg-logo.png"
 import glasses1 from "../images/glasses1.jpg"
 import keps1 from "../images/keps1.jpg"
 import klocka1 from "../images/klocka1.jpg"
@@ -20,8 +21,9 @@ class Main extends Component {
                 <img className="imageBg" src={mainMan} alt="" />
 
                 <div className="flex centerX centerY column axgTitle">
-                    <h1 className="flex centerY h1Main">A <span className="mainXLogo">X</span> G</h1>
-                    <p>Clothing shop</p>
+                <img style={{ height: 'auto', width: '10rem' }} src={axgLogo} alt="" />
+                    {/* <h1 className="flex centerY h1Main">A <span className="mainXLogo">X</span> G</h1> */}
+                    <p style={{ margin: '2rem', fontSize: '2rem' }}>Clothing shop</p>
 
                 </div>
 
