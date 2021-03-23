@@ -37,7 +37,7 @@ function ShippingFields(props: Props) {
          <Form.Item
               name="Shipping"
               rules={[{ required: true, message: "Please pick an item!" }]}
-              label="Payment Method"
+              label="PaymentMethod"
             >
               <Radio.Group>
                 <div className="radioBtn">

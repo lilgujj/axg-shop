@@ -78,13 +78,8 @@ class Header extends Component<Props, State> {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link onClick={this.menuToggle} className="linkStyle links"to='/shop'>
+                                        <Link onClick={this.menuToggle} className="linkStyle links"to='/about'>
                                             About
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link onClick={this.menuToggle} className="linkStyle links"to='/shop'>
-                                            Contact
                                         </Link>
                                     </li>
                                 <div className="close">

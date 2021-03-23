@@ -35,9 +35,31 @@ const CheckOut = () => {
   const onCheck = async () => {
     try {
       const values = await form.validateFields();
+
+      const user = {
+        firstname: values.firstname,
+        lastname: values.lastname,
+        adress: values.adress,
+        ZipCode: values.ZipCode,
+        City: values.City,
+        phone: values.phone,
+        email: values.email,
+      }
+      
+      const shippingAndPayment = {
+        PaymentMethod: values.PaymentMethod,
+        Shipping: values.Shipping,
+        FullName: values.FullName,
+        CardNumber: values.CardNumber,
+        CVC: values.CVC,
+        MMYY: values.MMYY,
+        phone: values.phone,
+        email: values.email
+      }
+
       setProceed(!isProceedValid);
       setLoading(!loading)
-      await mockApi(values);
+      await mockApi(shippingAndPayment, user);
       setFinish(true);
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);

@@ -9,7 +9,7 @@ import Shop from "./Shop";
 import ShoppingCartSidebar from './Cart';
 import CheckOut from "./checkOut";
 import Confirm from "./confirm";
-
+import About from "./About";
 class Layout extends Component {
 
     render() {
@@ -36,8 +36,9 @@ class Layout extends Component {
                     <Route path="/confirm">
                       <Confirm />
                     </Route>
-
-
+                    <Route path="/about">
+                        <About />
+                    </Route>
                 </Switch>
                 <Footer style={{textAlign: "center"}}>
                     Anton X Gustav <br />clothing

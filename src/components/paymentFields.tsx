@@ -40,7 +40,7 @@ function PaymentFields(props: Props) {
     return (
     <div className="flex-col centerY centerX" style={{width: "80%"}}>
         <Form.Item
-              name="Payment Method"
+              name="PaymentMethod"
               rules={[{ required: true, message: "Please pick an item!" }]}
               label="Payment Method"
             >
@@ -107,7 +107,7 @@ function PaymentFields(props: Props) {
                 <div className="flex-col centerY centerX" style={{width: "100%"}}>
                 <Form.Item
                   style={{ width: "80%" }}
-                  name="Full Name"
+                  name="FullName"
                   label="Full Name"
                   rules={[{ required: true }]}
                 >
@@ -115,7 +115,7 @@ function PaymentFields(props: Props) {
                 </Form.Item>
                 <Form.Item
                   style={{ width: "80%" }}
-                  name="Card Number"
+                  name="CardNumber"
                   label="Card Number"
                   rules={[{ required: true }]}
                 >
@@ -124,7 +124,7 @@ function PaymentFields(props: Props) {
                 <div className="flex centerX centerY">
                   <Form.Item
                     style={{ width: "80%" }}
-                    name="MM/YY"
+                    name="MMYY"
                     label="MM / YY"
                     rules={[{ required: true }]}
                   >

@@ -1,0 +1,10 @@
+.about-div {
+    min-height: 100vh;
+
+}
+
+.about-bg {
+    background: #EFF2F5;
+    padding: 2rem;
+    border-radius: 1rem;
+}

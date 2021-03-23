@@ -47,7 +47,7 @@ function CustomerFields() {
                 <Input />
               </Form.Item>
               <Form.Item 
-                name="Zip Code"
+                name="ZipCode"
                 label="Zip Code"
                 rules={[{ required: true }]}>
                   <Input />
