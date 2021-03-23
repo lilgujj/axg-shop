@@ -4,7 +4,16 @@
 }
 
 .about-bg {
-    background: #EFF2F5;
+    background: rgba(255, 255, 255, 0.7);
     padding: 2rem;
     border-radius: 1rem;
+    width: 40%;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+@media (max-width: 40rem) {
+    .about-bg {
+        width: 80%
+    }
 }

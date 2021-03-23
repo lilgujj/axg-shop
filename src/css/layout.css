@@ -25,7 +25,11 @@
 }
 
 .centerText {
-    align-text: center;
+    text-align: center;
+}
+
+.end {
+    justify-content: flex-end;
 }
 
 .column {
