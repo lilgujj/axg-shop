@@ -5,13 +5,12 @@ import ProductCard from "./ProductCard";
 import shopImg from "../images/shop-img.jpg";
 import { Link,  Route,  Switch, } from "react-router-dom";
 import ProductItem from "./ProductItem";
-import { CartContext } from '../context/CartContext';
-import { products } from "../products";
+import { ProductContext } from '../context/ProductContext';
 
 class Shop extends Component {
 
-    static contextType = CartContext;
-    context!: React.ContextType<typeof CartContext>
+    static contextType = ProductContext;
+    context!: React.ContextType<typeof ProductContext>
 
         render() {
  
@@ -26,7 +25,7 @@ class Shop extends Component {
                     <Switch>
                         <Route exact path="/shop">
                             {
-                                products.map((item, index) => (
+                                this.context.products.map((item, index) => (
                                     <div key={index} className="shopItems flex centerY centerX">
                                         <Link to={`shop/product/${item.productName}`}>
                                             <ProductCard title={item.productName} description={item.price} key={item.id} img={item.img} />
