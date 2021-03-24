@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext";
 import React, { useContext } from 'react';
-import { products } from "../products";
+import { Product, products } from "../products";
 import { Button, Form, Input, Upload } from 'antd'
 import "../css/layout.css";
 import "../css/checkOut.css";
@@ -40,18 +40,35 @@ function Admin() {
             description: values.description
         })
     }
+
+    const remove = (id: string) => {
+
+        products.forEach((item, index) => {
+            if(item.productName === id) {
+                products.splice(index, 1)
+            
+            } 
+    })
+}
     
     return (
         <div className="formContainer flex centerY centerX" >
             <div className="form flex-col centerY centerX">
                 <div style={{ margin: ".5rem 0", width: "100%" }}>
+                    <div className="flex space-between">
+                        <h4 style={{width: "11rem"}}>Product Name</h4>
+                        <h4>id</h4>
+                        <h4>price</h4>
+                        <div></div>
+                        <div></div>
+                    </div>
 
                     {
-                        products.map((p) => {
+                        products.map((p) => (
                             <>
-                            <Crud productName={p.productName} id={p.id} description={p.description} price={p.price} image={p.img} /> 
+                            <Crud delete={remove} productName={p.productName} id={p.id} description={p.description} price={p.price} image={p.img} /> 
                             </>
-                        })
+                            ))
                     }
                     <Form
                         form={form}
