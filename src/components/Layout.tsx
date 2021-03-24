@@ -10,6 +10,7 @@ import ShoppingCartSidebar from './Cart';
 import CheckOut from "./checkOut";
 import Confirm from "./confirm";
 import About from "./About";
+import Admin from "./Admin";
 class Layout extends Component {
 
     render() {
@@ -38,6 +39,9 @@ class Layout extends Component {
                     </Route>
                     <Route path="/about">
                         <About />
+                    </Route>
+                    <Route path="/admin">
+                        <Admin />
                     </Route>
                 </Switch>
                 <Footer style={{textAlign: "center"}}>

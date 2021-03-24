@@ -96,7 +96,9 @@ class Header extends Component<Props, State> {
                                             </Badge>
                                         </Link>
                                     </div>
-                                    <UserOutlined style={{fontSize: '2rem'}}/>
+                                    <Link to="/admin">
+                                        <UserOutlined style={{fontSize: '2rem'}}/>
+                                    </Link>
                                 </div>
                             </div>
                         </nav>
