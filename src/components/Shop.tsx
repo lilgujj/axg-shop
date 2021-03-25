@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, CSSProperties } from "react";
 import "../css/shop.css";
 import "../css/layout.css";
 import ProductCard from "./ProductCard";
@@ -21,7 +21,7 @@ class Shop extends Component {
                     <h1 className="shopH1">Shop</h1>
 
                 </div>
-                <div className="shopContainer flex centerY centerX">
+                <div className="shopContainer flex centerY centerX" style={divRootStyle}>
                     <Switch>
                         <Route exact path="/shop">
                             {
@@ -46,6 +46,13 @@ class Shop extends Component {
         
         }
         
+}
+
+const divRootStyle: CSSProperties= {
+    width: "100%",
+    flexWrap: "wrap",
+    margin: "2rem 0",
+    minHeight: "50vh",
 }
 
 export default Shop;
