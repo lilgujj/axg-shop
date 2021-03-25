@@ -15,7 +15,7 @@ class Shop extends Component {
         render() {
  
         return(
-            <>
+            <div>
                 <img className="imageBack" src={shopImg} alt=""/>
                 <div className="flex column centerY centerX shopTitle">
                     <h1 className="shopH1">Shop</h1>
@@ -40,7 +40,7 @@ class Shop extends Component {
                             
                     </Switch>
                 </div>
-            </>
+            </div>
         )
 
         
