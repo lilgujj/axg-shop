@@ -16,8 +16,8 @@ class Shop extends Component {
  
         return(
             <div>
-                <img className="imageBack" src={shopImg} alt=""/>
-                <div className="flex column centerY centerX shopTitle">
+                <img src={shopImg} alt="" style={imageBack}/>
+                <div className="flex column centerY centerX " style={shopTitle}>
                     <h1 className="shopH1">Shop</h1>
 
                 </div>
@@ -53,6 +53,19 @@ const divRootStyle: CSSProperties= {
     flexWrap: "wrap",
     margin: "2rem 0",
     minHeight: "50vh",
+}
+const imageBack: CSSProperties= {
+    position: "absolute",
+    zIndex: -100,
+    height: "35vh",
+    width: "100%",
+    objectFit: "cover",
+    top: 0,
+}
+const shopTitle: CSSProperties= {
+    width: "100%",
+    height: "35vh",
+    color: "white"
 }
 
 export default Shop;
