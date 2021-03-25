@@ -4,13 +4,13 @@ interface Props {
     check: () => void
 }
 
-function AdminForm(props: Props) {
+function AdminFields(props: Props) {
 
     return (
         <>
                 <Form.Item
                     style={{ width: "80%" }}
-                    name="productname"
+                    name="productName"
                     label="Product Name"
                     rules={[{ required: true }]}
                 >
@@ -42,7 +42,7 @@ function AdminForm(props: Props) {
                 </Form.Item>
                 <Form.Item
                     style={{ width: "80%" }}
-                    name="image"
+                    name="img"
                     label="image"
                     rules={[{ required: true }]}
                 >
@@ -54,4 +54,4 @@ function AdminForm(props: Props) {
     );
 }
 
-export default AdminForm;
+export default AdminFields;

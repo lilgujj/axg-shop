@@ -8,8 +8,8 @@ import klarna from "../images/klarna.png"
 import swish from "../images/swish.png"
 
 interface Props {
-    phoneNumber: any;
-    email: any;
+    phoneNumber: string;
+    email: string;
 }
 
 function PaymentFields(props: Props) {

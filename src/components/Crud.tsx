@@ -8,9 +8,12 @@ interface Props {
     price: number,
     image: string,
     delete: (id: string) => void;
+    edit: (id: string) => void;
 }
 
 function Crud(props: Props) {
+
+    
     return (
         
         <div className="flex space-between" style={{ width: '100%' }}>
@@ -19,7 +22,7 @@ function Crud(props: Props) {
             <div>{props.price}</div>
             {/* <div>{props.description}</div> */}
             <div>
-                <Button>Edit</Button>
+                <Button onClick={() => props.edit(props.productName)}>Edit</Button>
                 <Button onClick={() => props.delete(props.productName)}>Delete</Button>
             </div>
         </div>

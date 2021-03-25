@@ -6,38 +6,37 @@ export const ProductContext = createContext<ProductValue>({
     products: [],
     addProduct: () => {},
     remove: () => {},
+    handleOk: () => {},
+    showModal: () => {},
+    handleCancel: () => {},
+    isModalVisible: false,
 })
 
 
 interface State {
     products: Product[],
+    isModalVisible: boolean
 }
 
 interface ProductValue extends State {
     addProduct: (values: any) => void,
     remove: (id: string) => void,
+    handleOk: () => void,
+    showModal: (id: string) => void,
+    handleCancel: () => void,
 }
 
 
 class ProductProvider extends Component<{}, State> {
     
     state: State = {
-        products: products
+        products: products,
+        isModalVisible: false,
     }
 
-     addProductContext = (values: any) => {
-        const updateProductList: any = products.push({
-            productName: values.productname,
-            price: values.price,
-            id: values.id,
-            img: values.image,
-            description: values.description
-        })
-        localStorage.setItem('products', JSON.stringify(this.state.products))
-
-        this.setState({
-            products: [...products, updateProductList]
-        })
+    addProductContext = (product: Product) => {
+        const updateProductList = [...this.state.products, product];
+        this.setState({ products: updateProductList })
     }
 
     remove = (id: string) => {
@@ -45,7 +44,6 @@ class ProductProvider extends Component<{}, State> {
         products.forEach((item, index) => {
             if(item.productName === id) {
                 products.splice(index, 1);
-                localStorage.setItem('products', JSON.stringify(this.state.products));
             } 
         this.setState({
             products: [...products]
@@ -53,17 +51,50 @@ class ProductProvider extends Component<{}, State> {
     })
 }
 
-    componentDidMount() {
+    handleOk = () => {
+        this.setState({ isModalVisible: false })
+
+    }
+    
+    showModal = (id: string) => {
+        this.setState({ isModalVisible: true })
+        
+        products.forEach((item, index) => {
+            if(item.productName === id) {
+                console.log(item.productName, item.price)
+            }
+        })
+    };
+
+    handleCancel = () => {
+        this.setState({ isModalVisible: false })
+    };
+
+    componentDidUpdate() {
         localStorage.setItem('products', JSON.stringify(this.state.products))
     }
 
+    componentDidMount = () => {
+        const res = localStorage.getItem('products')
+        if (res) {
+            const products = JSON.parse(res);
+            this.setState({ products })
+        }
+    }
+
+
+    
     render() {
-        console.log(this.state.products)
         return(
             <ProductContext.Provider value= {{
                 products: this.state.products,
                 addProduct: this.addProductContext,
-                remove: this.remove
+                remove: this.remove,
+                handleOk: this.handleOk,
+                showModal: this.showModal,
+                handleCancel: this.handleCancel,
+                isModalVisible: this.state.isModalVisible,
+            
 
             }}>
                 {this.props.children}
