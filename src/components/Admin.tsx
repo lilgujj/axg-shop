@@ -5,8 +5,8 @@ import "../css/checkOut.css";
 import AdminFields from "./adminForm";
 import Crud from "./Crud";
 import { ProductContext } from "../context/ProductContext";
-import React, { useContext, useState } from "react"
-import { products } from '../products';
+import React, { useContext} from "react"
+
 
 
 function Admin() {

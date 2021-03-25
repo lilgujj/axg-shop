@@ -1,5 +1,4 @@
 import { Button, Form, Input } from "antd";
-import React from "react";
 interface Props {
     check: () => void
 }

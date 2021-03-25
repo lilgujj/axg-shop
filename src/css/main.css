@@ -41,7 +41,7 @@
 .textStyle {
     position: absolute;
     margin: auto;
-    zIndex: 10;
+    z-index: 10;
     color: black;
     padding: .5rem;
     background: white;
