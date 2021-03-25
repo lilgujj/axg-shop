@@ -3,11 +3,14 @@ import Layout from "./components/Layout";
 import "./index.css"
 import { BrowserRouter  } from "react-router-dom";
 import DataProvider from "./context/CartContext";
+import ProductProvider from "./context/ProductContext";
 
 function App() {
   return (
 
+    <ProductProvider>
     <DataProvider>
+
 
       <Suspense fallback={<h2>Error</h2>}>
 
@@ -20,6 +23,7 @@ function App() {
       </Suspense>
 
     </DataProvider>
+    </ProductProvider>
   );
 }
 

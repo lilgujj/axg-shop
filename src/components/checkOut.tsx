@@ -118,10 +118,7 @@ const CheckOut = () => {
   }
   return (
     <div className="formContainer flex centerY centerX">
-      <div
-        className="form flex-col centerY centerX"
-        style={{ marginTop: "5rem", marginBottom: "1rem" }}
-      >
+      <div className="form flex-col centerY centerX">
         <div style={{ margin: ".5rem 0", width: "100%" }}>
           <Form
             form={form}

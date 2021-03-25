@@ -20,12 +20,12 @@ interface CartProduct extends Product {
 
 interface State {
     cart: CartProduct[],
-    total: any
+    total: number
 }
 
 interface ContextValue extends State {
-    addToCart: (id: any) => void;
-    removeProduct: (id: any) => void;
+    addToCart: (id: string) => void;
+    removeProduct: (id: string) => void;
     decrease: (id: string) => void;
     increase: (id: string) => void;
     getTotal: () => void;
@@ -37,7 +37,7 @@ class DataProvider extends Component<{}, State> {
     state: State = {
         cart: [],
         total: 0
-     }
+    }
 
     emptyCart = () => {
         this.setState({
@@ -133,12 +133,11 @@ class DataProvider extends Component<{}, State> {
 
     componentDidUpdate = () => {
         localStorage.setItem('cartProducts', JSON.stringify(this.state.cart))
-
     }
     componentDidMount = () => {
-        const res: any = localStorage.getItem('cartProducts')
-        const cartPruducts = JSON.parse(res);
-        if(cartPruducts !== null){
+        const res = localStorage.getItem('cartProducts')
+        if(res){
+            const cartPruducts = JSON.parse(res);
             this.setState({
                 cart: cartPruducts
             })

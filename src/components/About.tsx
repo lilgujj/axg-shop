@@ -16,6 +16,7 @@ function About() {
             <a
               href="https://github.com/antonmaenpaa"
               target="_blank"
+              rel="noreferrer"
               style={{ color: "black" }}
             >
               <GithubOutlined style={{ fontSize: "4rem", margin: ".5rem" }} />
@@ -26,6 +27,7 @@ function About() {
             <a
               href="https://github.com/lilgujj"
               target="_blank"
+              rel="noreferrer"
               style={{ color: "black" }}
             >
               <GithubOutlined style={{ fontSize: "4rem", margin: ".5rem" }} />
