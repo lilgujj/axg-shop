@@ -6,6 +6,7 @@ import AdminFields from "./adminForm";
 import Crud from "./Crud";
 import { ProductContext } from "../context/ProductContext";
 import React, { useContext, useState } from "react"
+import { products } from '../products';
 
 
 function Admin() {
@@ -36,6 +37,10 @@ function Admin() {
 
     
     return (
+
+        <ProductContext.Consumer>
+            {(item) => {
+                return(
         <div className="formContainer flex centerY centerX" >
             <div className="form flex-col centerY centerX">
                 <div style={{ margin: ".5rem 0", width: "100%" }}>
@@ -64,58 +69,74 @@ function Admin() {
                         validateMessages={validateMessages}
                     >
                         <AdminFields  check={onCheck}/>
-                        <Modal title="Basic Modal" visible={context.isModalVisible} onOk={() => context.handleOk} onCancel={context.handleCancel}>
-                            <Form.Item
-                                style={{ width: "80%" }}
-                                name="productName"
-                                label="Product Name"
-                                rules={[{ required: true }]}
-                            >
-                                <Input defaultValue={context.products[0].productName} />
-                            </Form.Item>
-                            <Form.Item
-                                style={{ width: "80%" }}
-                                name="price"
-                                label="Price"
-                                rules={[{ required: true }]}
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Form.Item
-                                style={{ width: "80%" }}
-                                name="id"
-                                label="Id"
-                                rules={[{ required: true}]}
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Form.Item
-                                style={{ width: "80%" }}
-                                name="description"
-                                label="Description"
-                                rules={[{ required: true }]}
-                            >
-                                <Input />
-                            </Form.Item>
-                            <Form.Item
-                                style={{ width: "80%" }}
-                                name="img"
-                                label="image"
-                                rules={[{ required: true }]}
-                            >
-                                <Input />
-                            </Form.Item>
-                        </Modal>
                     </Form>
+                            <Modal 
+                                title="Basic Modal" 
+                                visible={context.isModalVisible} 
+                                onOk={() => context.handleOk} 
+                                onCancel={context.handleCancel}>
 
-                    
-
+                            <Form
+                                form={form}
+                                layout="vertical"
+                                name="dynamic_rules"
+                                fields={context.fieldsInfo}
+                                onFieldsChange={(_, allFields) => context.onChangeFields(allFields)}
+                                validateMessages={validateMessages}
+                            >
+                                <Form.Item
+                                    style={{ width: "80%" }}
+                                    name="productNameModal"
+                                    label="Product Name"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    style={{ width: "80%" }}
+                                    name="priceModal"
+                                    label="Price"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    style={{ width: "80%" }}
+                                    name="idModal"
+                                    label="Id"
+                                    rules={[{ required: true}]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    style={{ width: "80%" }}
+                                    name="descriptionModal"
+                                    label="Description"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                <Form.Item
+                                    style={{ width: "80%" }}
+                                    name="imgModal"
+                                    label="image"
+                                    rules={[{ required: true }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+                                </Form> 
+                            </Modal>
 
                 </div>
 
             </div>
 
         </div>
+
+    )
+            }}
+            
+        </ProductContext.Consumer>
     )
 }
 

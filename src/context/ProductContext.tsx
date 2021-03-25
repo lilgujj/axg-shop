@@ -10,12 +10,15 @@ export const ProductContext = createContext<ProductValue>({
     showModal: () => {},
     handleCancel: () => {},
     isModalVisible: false,
+    fieldsInfo: [],
+    onChangeFields: () => {}
 })
 
 
 interface State {
     products: Product[],
-    isModalVisible: boolean
+    isModalVisible: boolean,
+    fieldsInfo: any[]
 }
 
 interface ProductValue extends State {
@@ -24,6 +27,7 @@ interface ProductValue extends State {
     handleOk: () => void,
     showModal: (id: string) => void,
     handleCancel: () => void,
+    onChangeFields: (allFields: any) => void
 }
 
 
@@ -32,7 +36,25 @@ class ProductProvider extends Component<{}, State> {
     state: State = {
         products: products,
         isModalVisible: false,
+        
+
+        fieldsInfo: [
+            {
+                productNameModal: "",
+                priceModal: 0,
+                idModal: "",
+                descriptionModal: "",
+                imgModal: "",
+            }
+            
+
+        ],
     }
+
+     onChangeFields = (allFields: any) => {
+        this.setState({fieldsInfo: allFields});
+        console.log(this.state.fieldsInfo)
+  };
 
     addProductContext = (product: Product) => {
         const updateProductList = [...this.state.products, product];
@@ -55,14 +77,38 @@ class ProductProvider extends Component<{}, State> {
         this.setState({ isModalVisible: false })
 
     }
+
+    getRecord = (id: string) => {
+        const product = this.state.products.find(item => item.productName === id)
+        return product;
+    }
     
     showModal = (id: string) => {
         this.setState({ isModalVisible: true })
+        // const products = this.state.products;
+        // const index = products.indexOf(this.getRecord(id));
+        // const selectedProduct = products[index];
+        // this.setState({
+
+        // })
+        
+
         
         products.forEach((item, index) => {
             if(item.productName === id) {
-                console.log(item.productName, item.price)
+                this.setState({
+                    fieldsInfo: [{
+                        productNameModal: item.productName,
+                        priceModal: item.price,
+                        idModal: item.id,
+                        descriptionModal: item.description,
+                        imgModal: item.img
+                    }
+                    ]
+                })
+                console.log(this.state.fieldsInfo[0].productNameModal)
             }
+            console.log(this.state.fieldsInfo)
         })
     };
 
@@ -94,6 +140,8 @@ class ProductProvider extends Component<{}, State> {
                 showModal: this.showModal,
                 handleCancel: this.handleCancel,
                 isModalVisible: this.state.isModalVisible,
+                fieldsInfo: this.state.fieldsInfo,
+                onChangeFields: this.onChangeFields
             
 
             }}>
