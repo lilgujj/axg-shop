@@ -27,46 +27,42 @@ const CheckOut = () => {
   };
 
   const [form] = Form.useForm();
-
   const [isProceedValid, setProceed] = useState(false);
-
   const [loading, setLoading] = useState(false);
-  
+
   const onCheck = async () => {
     try {
       const values = await form.validateFields();
-
-      const user = {
-        firstname: values.firstname,
-        lastname: values.lastname,
-        adress: values.adress,
-        ZipCode: values.ZipCode,
-        City: values.City,
-        phone: values.phone,
-        email: values.email,
-      }
-      
-      const shippingAndPayment = {
-        PaymentMethod: values.PaymentMethod,
-        Shipping: values.Shipping,
-        FullName: values.FullName,
-        CardNumber: values.CardNumber,
-        CVC: values.CVC,
-        MMYY: values.MMYY,
-        phone: values.phone,
-        email: values.email
+      const allInformation = {
+        user: {
+          firstname: values.firstname,
+          lastname: values.lastname,
+          adress: values.adress,
+          ZipCode: values.ZipCode,
+          City: values.City,
+          phone: values.phone,
+          email: values.email,
+        },
+        shippingAndPayment: {
+          PaymentMethod: values.PaymentMethod,
+          Shipping: values.Shipping,
+          FullName: values.FullName,
+          CardNumber: values.CardNumber,
+          CVC: values.CVC,
+          MMYY: values.MMYY,
+          phone: values.phone,
+          email: values.email
+        }
       }
 
       setProceed(!isProceedValid);
       setLoading(!loading)
-      await mockApi(shippingAndPayment, user);
+      await mockApi(allInformation);
       setFinish(true);
     } catch (errorInfo) {
       console.log("Failed:", errorInfo);
     }
   };
-
-
 
   const onChangePersonal = (allFields: any) => {
     setFields(allFields);
@@ -133,8 +129,8 @@ const CheckOut = () => {
 
             <PaymentFields phoneNumber={personalInfo[3].value} email={personalInfo[2].value} />
 
-            <ShippingFields check={onCheck} loading={loading}/>
-                
+            <ShippingFields check={onCheck} loading={loading} />
+
           </Form>
         </div>
       </div>

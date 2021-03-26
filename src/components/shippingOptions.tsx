@@ -1,6 +1,5 @@
 import { Component, ContextType } from "react";
-import {CartContext} from "../context/CartContext";
-
+import { CartContext } from "../context/CartContext";
 
 interface Props {
     name: string,
@@ -8,13 +7,9 @@ interface Props {
     time: string,
 }
 
-
 class ShippingOptions extends Component<Props> {
     context!: ContextType<typeof CartContext>;
     static contextType = CartContext;
-    
-
-    
 
     render() {
         const cart = this.context
@@ -26,10 +21,8 @@ class ShippingOptions extends Component<Props> {
                 <h2>{this.props.price}kr</h2>
                 <p>{cart.total} + {this.props.price}kr</p>
                 <h3 style={{ color: 'red' }}>Total: {cart.total + this.props.price}kr</h3>
-                
             </div>
         );
-        
     }
 }
 

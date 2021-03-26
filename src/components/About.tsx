@@ -2,13 +2,12 @@ import GithubOutlined from "@ant-design/icons/lib/icons/GithubOutlined";
 import React from "react";
 import "../css/about.css";
 import "../css/layout.css";
-import  about  from  "../images/aboutMan.jpg"
+import about from "../images/aboutMan.jpg"
 
 function About() {
   return (
-    
     <div className="flex-col centerX end about-div centerY">
-    <img className="imageBg" src={about} alt="" />
+      <img className="imageBg" src={about} alt="" />
       <div className="about-bg flex-col centerY centerX">
         <h3>This e-commerce was provided to you by:</h3>
         <div style={{ width: "40%" }} className="flex space-around">
@@ -37,7 +36,6 @@ function About() {
         </div>
       </div>
     </div>
-    
   );
 }
 

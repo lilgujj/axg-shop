@@ -56,5 +56,4 @@ export const products: Product[] = [
         img: klocka2,
         description: "Maurice De Mauriac watch with date and timer functions to keep you updated.",
     },
-
 ]

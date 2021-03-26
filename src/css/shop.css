@@ -1,5 +1,4 @@
 
-
 .imageBack {
     position: absolute;
     z-index: -100;
@@ -7,7 +6,6 @@
     width: 100%;
     object-fit: cover;
     top: 0;
-
 }
 
 .shopTitle {
@@ -22,7 +20,6 @@
     text-transform: uppercase;
     font-weight: 400;
     margin-bottom: 0;
-    
 }
 
 .shopItems {

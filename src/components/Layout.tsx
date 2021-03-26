@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import Header from "./Header";
 import Main from "./main"
-
-import  "../css/layout.css"
+import "../css/layout.css"
 import { Footer } from "antd/lib/layout/layout";
 import { Route, Switch } from "react-router";
 import Shop from "./Shop";
@@ -11,8 +10,11 @@ import CheckOut from "./checkOut";
 import Confirm from "./confirm";
 import About from "./About";
 import Admin from "./Admin";
+
 class Layout extends Component {
+
     render() {
+
         return (
             <div className="flex-col" style={{ minHeight: '100%' }}>
                 <Header />
@@ -30,7 +32,7 @@ class Layout extends Component {
                         <ShoppingCartSidebar />
                     </Route>
                     <Route path="/confirm">
-                      <Confirm />
+                        <Confirm />
                     </Route>
                     <Route path="/about">
                         <About />
@@ -39,7 +41,7 @@ class Layout extends Component {
                         <Admin />
                     </Route>
                 </Switch>
-                <Footer style={{textAlign: "center"}}>
+                <Footer style={{ textAlign: "center" }}>
                     Anton X Gustav <br />clothing
                 </Footer>
             </div>

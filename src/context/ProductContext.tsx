@@ -1,19 +1,17 @@
 import { Component, createContext } from "react";
 import { Product, products } from "../products"
 
-
 export const ProductContext = createContext<ProductValue>({
     products: [],
-    addProduct: () => {},
-    remove: () => {},
-    handleOk: () => {},
-    showModal: () => {},
-    handleCancel: () => {},
+    addProduct: () => { },
+    remove: () => { },
+    handleOk: () => { },
+    showModal: () => { },
+    handleCancel: () => { },
     isModalVisible: false,
     fieldsInfo: [],
-    onChangeFields: () => {}
+    onChangeFields: () => { }
 })
-
 
 interface State {
     products: Product[],
@@ -22,7 +20,7 @@ interface State {
 }
 
 interface ProductValue extends State {
-    addProduct: (values: any) => void,
+    addProduct: (values: Product) => void,
     remove: (id: string) => void,
     handleOk: () => void,
     showModal: (id: string) => void,
@@ -30,13 +28,10 @@ interface ProductValue extends State {
     onChangeFields: (allFields: any) => void
 }
 
-
 class ProductProvider extends Component<{}, State> {
-    
     state: State = {
         products: products,
         isModalVisible: false,
-        
 
         fieldsInfo: [
             {
@@ -46,15 +41,15 @@ class ProductProvider extends Component<{}, State> {
                 descriptionModal: "",
                 imgModal: "",
             }
-            
+
 
         ],
     }
 
-     onChangeFields = (allFields: any) => {
-        this.setState({fieldsInfo: allFields});
+    onChangeFields = (allFields: any) => {
+        this.setState({ fieldsInfo: allFields });
         console.log(this.state.fieldsInfo)
-  };
+    };
 
     addProductContext = (product: Product) => {
         const updateProductList = [...this.state.products, product];
@@ -62,40 +57,28 @@ class ProductProvider extends Component<{}, State> {
     }
 
     remove = (id: string) => {
-        
+
         products.forEach((item, index) => {
-            if(item.productName === id) {
+            if (item.productName === id) {
                 products.splice(index, 1);
-            } 
-        this.setState({
-            products: [...products]
+            }
+            this.setState({ products: [...products]})
         })
-    })
-}
+    }
 
     handleOk = () => {
         this.setState({ isModalVisible: false })
-
     }
 
     getRecord = (id: string) => {
         const product = this.state.products.find(item => item.productName === id)
         return product;
     }
-    
+
     showModal = (id: string) => {
         this.setState({ isModalVisible: true })
-        // const products = this.state.products;
-        // const index = products.indexOf(this.getRecord(id));
-        // const selectedProduct = products[index];
-        // this.setState({
-
-        // })
-        
-
-        
-        products.forEach((item, index) => {
-            if(item.productName === id) {
+        products.forEach((item) => {
+            if (item.productName === id) {
                 this.setState({
                     fieldsInfo: [{
                         productNameModal: item.productName,
@@ -103,8 +86,7 @@ class ProductProvider extends Component<{}, State> {
                         idModal: item.id,
                         descriptionModal: item.description,
                         imgModal: item.img
-                    }
-                    ]
+                    }]
                 })
                 console.log(this.state.fieldsInfo[0].productNameModal)
             }
@@ -128,11 +110,9 @@ class ProductProvider extends Component<{}, State> {
         }
     }
 
-
-    
     render() {
-        return(
-            <ProductContext.Provider value= {{
+        return (
+            <ProductContext.Provider value={{
                 products: this.state.products,
                 addProduct: this.addProductContext,
                 remove: this.remove,
@@ -142,15 +122,11 @@ class ProductProvider extends Component<{}, State> {
                 isModalVisible: this.state.isModalVisible,
                 fieldsInfo: this.state.fieldsInfo,
                 onChangeFields: this.onChangeFields
-            
-
             }}>
                 {this.props.children}
             </ProductContext.Provider>
-        
         )
     }
 }
-
 
 export default ProductProvider;

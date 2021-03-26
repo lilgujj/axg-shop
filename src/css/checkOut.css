@@ -32,6 +32,7 @@
 }
 
 @media (max-width: 40em) {
+    
     .formBorder {
         padding: .5rem 1rem;
     }

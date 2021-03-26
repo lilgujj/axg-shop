@@ -2,15 +2,14 @@ import { Component, createContext } from 'react';
 import { Product, products } from '../products';
 import { message } from 'antd';
 
-
 export const CartContext = createContext<ContextValue>({
-    addToCart: () => {},
-    removeProduct: () => {},
-    decrease: () => {},
-    increase: () => {},
-    getTotal: () => {},
-    emptyCart: () => {},
-    cart:[],
+    addToCart: () => { },
+    removeProduct: () => { },
+    decrease: () => { },
+    increase: () => { },
+    getTotal: () => { },
+    emptyCart: () => { },
+    cart: [],
     total: 0,
 });
 
@@ -45,76 +44,65 @@ class DataProvider extends Component<{}, State> {
         })
     }
 
-
-     addProductToCart = (id: string) => {
+    addProductToCart = (id: string) => {
         const { cart } = this.state;
         const check = cart.every(item => {
             return item.productName !== id
-            
+
         })
         const success = () => {
-           message.success('The product has been added to cart', 2);
-         };
+            message.success('The product has been added to cart', 2);
+        };
 
-         const warning = () => {
+        const warning = () => {
             message.warning('The product has already been added to cart', 2);
-          };
-       
-        
-        if(check) {
+        };
+
+        if (check) {
             const product = products.find(product => {
                 return product.productName === id
             })!
 
             const cartProduct: CartProduct = { ...product, count: 1 }
 
-            this.setState({ cart: [...cart, cartProduct]})
+            this.setState({ cart: [...cart, cartProduct] })
             success();
-        }else {
+        } else {
             warning();
         }
-
-     }
-
+    }
 
     removeProductfromCart = (id: string) => {
 
         const error = () => {
             message.error('The product has been deleted', 2);
-          };
-            const { cart } = this.state;
-            cart.forEach((item, index) => {
-                if(item.productName === id) {
-                    cart.splice(index, 1)
-                
-                } 
-         
-            
-                })
-                this.setState({ cart: cart })
-                this.getTotalPrice()
-        // } 
+        };
+        const { cart } = this.state;
+        cart.forEach((item, index) => {
+            if (item.productName === id) {
+                cart.splice(index, 1)
+            }
+        })
+        this.setState({ cart: cart })
+        this.getTotalPrice()
         error();
     }
-    
 
-    // decrease item count
     decreaseCount = (id: string) => {
         const { cart } = this.state;
         cart.forEach(item => {
-            if(item.productName === id) {
+            if (item.productName === id) {
                 item.count === 1 ? item.count = 1 : item.count -= 1;
             }
         })
-        this.setState({cart: cart})
+        this.setState({ cart: cart })
         this.getTotalPrice()
     }
 
-    // increse item count
     increaseCount = (id: string) => {
         const { cart } = this.state;
         cart.forEach(item => {
-            if(item.productName === id) {
+            if (item.productName === id) {
                 item.count += 1;
             }
         })
@@ -123,33 +111,27 @@ class DataProvider extends Component<{}, State> {
     }
 
     getTotalPrice = () => {
-        const {cart } = this.state;
-        const total =  cart.reduce((prev, item) => {
+        const { cart } = this.state;
+        const total = cart.reduce((prev, item) => {
             return prev + (item.price * item.count);
         }, 0)
         this.setState({ total: total })
     }
-
 
     componentDidUpdate = () => {
         localStorage.setItem('cartProducts', JSON.stringify(this.state.cart))
     }
     componentDidMount = () => {
         const res = localStorage.getItem('cartProducts')
-        if(res){
+        if (res) {
             const cartPruducts = JSON.parse(res);
             this.setState({
                 cart: cartPruducts
             })
-
         }
     }
-    
-    
 
     render() {
-
-
         return (
             <CartContext.Provider value={{
                 cart: this.state.cart,
@@ -166,6 +148,5 @@ class DataProvider extends Component<{}, State> {
         )
     }
 }
-
 
 export default DataProvider;

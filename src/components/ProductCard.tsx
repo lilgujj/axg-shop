@@ -2,16 +2,16 @@ import { Component } from "react";
 import { Card } from "antd";
 import "../css/ProductCard.css"
 
-
 const { Meta } = Card;
 
 interface Props {
-    title: string,
-    description: number,
-    img: string
+  title: string,
+  description: number,
+  img: string
 }
 
-class ProductCard extends Component <Props> {
+class ProductCard extends Component<Props> {
+
   render() {
     return (
       <div>
@@ -21,13 +21,13 @@ class ProductCard extends Component <Props> {
           className="product-card"
           style={{ margin: ".5rem" }}
           cover={
-            <img 
+            <img
               alt="example"
               src={this.props.img}
             />
           }
-          >
-            <Meta title={this.props.title} description={this.props.description + "kr"} />
+        >
+          <Meta title={this.props.title} description={this.props.description + "kr"} />
         </Card>
       </div>
     );
