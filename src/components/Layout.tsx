@@ -12,14 +12,10 @@ import Confirm from "./confirm";
 import About from "./About";
 import Admin from "./Admin";
 class Layout extends Component {
-
     render() {
-
-        // console.log(this.state)
         return (
             <div className="flex-col" style={{ minHeight: '100%' }}>
                 <Header />
-
                 <Switch>
                     <Route exact path="/">
                         <Main />
@@ -27,7 +23,6 @@ class Layout extends Component {
                     <Route path="/shop">
                         <Shop />
                     </Route>
-
                     <Route path="/checkout">
                         <CheckOut />
                     </Route>
@@ -48,7 +43,6 @@ class Layout extends Component {
                     Anton X Gustav <br />clothing
                 </Footer>
             </div>
-
         )
     }
 }

@@ -10,18 +10,13 @@ function App() {
 
     <ProductProvider>
     <DataProvider>
-
-
       <Suspense fallback={<h2>Error</h2>}>
-
         <BrowserRouter>
           <div style={{ minHeight: '100%' }}>
             <Layout  />
           </div>
         </BrowserRouter>
-
       </Suspense>
-
     </DataProvider>
     </ProductProvider>
   );
