@@ -13,4 +13,4 @@ To start the development server, use:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-Open [project](https://axg-shop.netlify.app/about) in the browser via netlify.
+Open [project](https://axg-shop.netlify.app) in the browser via netlify.
