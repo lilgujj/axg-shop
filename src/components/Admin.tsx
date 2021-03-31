@@ -1,5 +1,5 @@
 
-import { Form, Input, Modal } from 'antd';
+import { Form, Modal } from 'antd';
 import "../css/layout.css";
 import "../css/checkOut.css";
 import "../css/admin.css";
@@ -7,9 +7,13 @@ import AdminFields from "./adminForm";
 import Crud from "./Crud";
 import { ProductContext } from "../context/ProductContext";
 import React, { useContext } from "react"
+import { useState } from 'react';
+import { Product } from '../products';
+import EditFields from './EditFields';
 
 function Admin() {
     const context = useContext(ProductContext)
+    const [editingProduct, setEditingProduct] = useState<Product>();
     const [form] = Form.useForm();
     
     const validateMessages = {
@@ -29,6 +33,13 @@ function Admin() {
         }
     };
 
+    const onEdit = async () => {
+
+    }
+
+    const confirmEdit = () => {
+    }
+
     return (
         <ProductContext.Consumer>
             {(item) => {
@@ -44,12 +55,18 @@ function Admin() {
                                             <th>Price</th>
                                         </tr>
                                     </thead>
-
-                                    {
-                                        context.products.map((p) => (
-                                                <Crud edit={context.showModal} key={p.id} delete={context.remove} productName={p.productName} id={p.id} description={p.description} price={p.price} image={p.img} />
-                                        ))
-                                    }
+                                    <tbody>
+                                        {
+                                            context.products.map((p) => (
+                                                <Crud
+                                                    key={p.id}
+                                                    product={p}
+                                                    edit={setEditingProduct}
+                                                    delete={context.remove}
+                                                />
+                                            ))
+                                        }
+                                    </tbody>
                                 </table>
                                 <Form
                                     form={form}
@@ -62,59 +79,19 @@ function Admin() {
                                     <AdminFields check={onCheck} />
                                 </Form>
                                 <Modal
-                                    title="Basic Modal"
-                                    visible={context.isModalVisible}
-                                    onOk={() => context.handleOk}
-                                    onCancel={context.handleCancel}>
+                                    title="Edit Product"
+                                    visible={Boolean(editingProduct)}
+                                    onOk={() => confirmEdit()}
+                                    onCancel={() => setEditingProduct(undefined)}>
 
                                     <Form
                                         form={form}
                                         layout="vertical"
                                         name="dynamic_rules"
-                                        fields={context.fieldsInfo}
-                                        onFieldsChange={(_, allFields) => context.onChangeFields(allFields)}
                                         validateMessages={validateMessages}
                                     >
-                                        <Form.Item
-                                            style={{ width: "80%" }}
-                                            name="productNameModal"
-                                            label="Product Name"
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
-                                        <Form.Item
-                                            style={{ width: "80%" }}
-                                            name="priceModal"
-                                            label="Price"
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
-                                        <Form.Item
-                                            style={{ width: "80%" }}
-                                            name="idModal"
-                                            label="Id"
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
-                                        <Form.Item
-                                            style={{ width: "80%" }}
-                                            name="descriptionModal"
-                                            label="Description"
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
-                                        <Form.Item
-                                            style={{ width: "80%" }}
-                                            name="imgModal"
-                                            label="image"
-                                            rules={[{ required: true }]}
-                                        >
-                                            <Input />
-                                        </Form.Item>
+                                        <EditFields product={editingProduct} check={onEdit}/>
+                                       
                                     </Form>
                                 </Modal>
                             </div>

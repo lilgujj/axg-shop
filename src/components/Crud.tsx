@@ -1,31 +1,24 @@
 import { Button } from "antd";
+import { Product } from "../products";
 
 interface Props {
-    productName: string,
-    id: string,
-    description: string,
-    price: number,
-    image: string,
+    product: Product;
     delete: (id: string) => void;
-    edit: (id: string) => void;
+    edit: (product: Product) => void;
 }
 
 function Crud(props: Props) {
-
+    const { productName, id, price } = props.product
     return (
-    <tbody>
         <tr>
-            <td>{props.productName}</td>
-            <td>{props.id}</td>
-            <td>{props.price}</td>
+            <td>{productName}</td>
+            <td>{id}</td>
+            <td>{price}</td>
             <td id="buttons">
-                <Button id="btn" onClick={() => props.edit(props.productName)}>Edit</Button>
-                <Button id="btn" onClick={() => props.delete(props.productName)}>Delete</Button>
+                <Button id="btn" onClick={() => props.edit(props.product)}>Edit</Button>
+                <Button id="btn" onClick={() => props.delete(productName)}>Delete</Button>
             </td>
         </tr>
-    </tbody>
-   
-
     )
 }
 

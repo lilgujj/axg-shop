@@ -38,7 +38,7 @@ export const products: Product[] = [
     {
         productName: 'Nike Snapback',
         price: 299,
-        id: '4',
+id: '4',
         img: keps2,
         description: "Nike Snapback. unisex and all fit",
     },

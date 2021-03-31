@@ -1,10 +1,10 @@
 import { Button, Form, Input } from "antd";
+
 interface Props {
     check: () => void
 }
 
 function AdminFields(props: Props) {
-
     return (
         <>
             <Form.Item
