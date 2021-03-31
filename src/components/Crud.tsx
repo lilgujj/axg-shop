@@ -13,16 +13,19 @@ interface Props {
 function Crud(props: Props) {
 
     return (
-        <div className="flex space-between" style={{ width: '100%' }}>
-            <div style={{ width: "10rem" }}>{props.productName}</div>
-            <div>{props.id}</div>
-            <div>{props.price}</div>
-            {/* <div>{props.description}</div> */}
-            <div>
-                <Button onClick={() => props.edit(props.productName)}>Edit</Button>
-                <Button onClick={() => props.delete(props.productName)}>Delete</Button>
-            </div>
-        </div>
+    <tbody>
+        <tr>
+            <td>{props.productName}</td>
+            <td>{props.id}</td>
+            <td>{props.price}</td>
+            <td id="buttons">
+                <Button id="btn" onClick={() => props.edit(props.productName)}>Edit</Button>
+                <Button id="btn" onClick={() => props.delete(props.productName)}>Delete</Button>
+            </td>
+        </tr>
+    </tbody>
+   
+
     )
 }
 
