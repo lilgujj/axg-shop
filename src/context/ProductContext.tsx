@@ -5,7 +5,7 @@ export const ProductContext = createContext<ProductValue>({
     products: [],
     addProduct: () => { },
     remove: () => { },
-
+    confirmEdit: () => { },
 })
 
 interface State {
@@ -13,15 +13,29 @@ interface State {
 }
 
 interface ProductValue extends State {
-    addProduct: (values: Product) => void,
-    remove: (id: string) => void,
-
+  addProduct: (values: Product) => void;
+  remove: (id: string) => void;
+  confirmEdit: (product: Product) => void;
 }
 
 class ProductProvider extends Component<{}, State> {
     state: State = {
         products: products,
+    }
 
+
+    //modal ok btn
+    confirmEdit = (product: Product) => {
+       let updatedProducts = products.map((item) => {
+          if (item.id === product.productName) {
+            return { ...item, product };
+          }
+          return item;
+        });
+    
+        this.setState({products: updatedProducts});
+        console.log(updatedProducts)
+        console.log(this.state.products)
     }
 
 
@@ -29,6 +43,7 @@ class ProductProvider extends Component<{}, State> {
         const updateProductList = [...this.state.products, product];
         this.setState({ products: updateProductList })
     }
+
 
     remove = (id: string) => {
         products.forEach((item, index) => {
@@ -63,6 +78,7 @@ class ProductProvider extends Component<{}, State> {
                 products: this.state.products,
                 addProduct: this.addProductContext,
                 remove: this.remove,
+                confirmEdit: this.confirmEdit,
             }}>
                 {this.props.children}
             </ProductContext.Provider>

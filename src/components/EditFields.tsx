@@ -1,59 +1,71 @@
-import { Form, Input } from "antd";
+import { Form } from "antd";
 import React from "react";
 import { Product } from "../products"
 
 interface Props {
     product?: Product;
-    check: () => void
+
 }
 
 function EditFields(props: Props) {
- const { product } = props;
+
+    const { product } = props;
+
+    if(!product) {
+        return <h2>EDIT NOT WORKING</h2>
+    }
+
     return(
         <>
         <Form.Item
             style={{ width: "80%" }}
             name="productNameEdit"
             label="Product Name"
-            rules={[{ required: true }]}
-        >
-            <Input defaultValue={product?.productName} />
+            >
+                <h3>{product.productName}</h3>
+       
         </Form.Item>
         <Form.Item
             style={{ width: "80%" }}
             name="priceEdit"
             label="Price"
-            rules={[{ required: true }]}
         >
-            <Input defaultValue={product?.price}/>
+                <h3>{product.price}</h3>
+          
         </Form.Item>
         <Form.Item
             style={{ width: "80%" }}
             name="idEdit"
-            label="Id"
-            rules={[{ required: true }]}
+                label="Id"
+        
         >
-            <Input defaultValue={product?.id}/>
+                <h3>{product.id}</h3>
+      
         </Form.Item>
         <Form.Item
             style={{ width: "80%" }}
             name="descriptionEdit"
-            label="Description"
-            rules={[{ required: true }]}
+                label="Description"
+
         >
-            <Input defaultValue={product?.description}/>
+            <h3>{product.description}</h3>
+     
         </Form.Item>
         <Form.Item
             style={{ width: "80%" }}
             name="imgEdit"
             label="image"
-            rules={[{ required: true }]}
+    
         >
-            <Input defaultValue={product?.img}/>
+            <h3>{product.img}</h3>
+       
         </Form.Item>
+
+   
     </>
 
     )
+
 }
 
 export default EditFields;

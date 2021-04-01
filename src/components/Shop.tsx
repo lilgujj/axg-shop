@@ -3,7 +3,7 @@ import "../css/shop.css";
 import "../css/layout.css";
 import ProductCard from "./ProductCard";
 import shopImg from "../images/shop-img.jpg";
-import { Link, Route, Switch, } from "react-router-dom";
+import { Route, Switch, } from "react-router-dom";
 import ProductItem from "./ProductItem";
 import { ProductContext } from '../context/ProductContext';
 
@@ -25,10 +25,8 @@ class Shop extends Component {
                         <Route exact path="/shop">
                             {
                                 this.context.products.map((item, index) => (
-                                    <div key={index} className="shopItems flex centerY centerX">
-                                        <Link to={`shop/product/${item.productName}`}>
-                                            <ProductCard title={item.productName} description={item.price} key={item.id} img={item.img} />
-                                        </Link>
+                                    <div key={index} className="shopItems flex centerY centerX">                       
+                                        <ProductCard title={item.productName} description={item.price} key={item.id} img={item.img} />                                 
                                     </div>
                                 ))
                             }
