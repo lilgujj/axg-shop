@@ -5,8 +5,7 @@ import { message } from 'antd';
 export const CartContext = createContext<ContextValue>({
     addToCart: () => { },
     removeProduct: () => { },
-    decrease: () => { },
-    increase: () => { },
+    changeCount: () => { },
     getTotal: () => { },
     emptyCart: () => { },
     cart: [],
@@ -25,8 +24,7 @@ interface State {
 interface ContextValue extends State {
     addToCart: (id: string) => void;
     removeProduct: (id: string) => void;
-    decrease: (id: string) => void;
-    increase: (id: string) => void;
+    changeCount: (id: string, symbol: string) => void,
     getTotal: () => void;
     emptyCart: () => void;
 }
@@ -48,7 +46,6 @@ class DataProvider extends Component<{}, State> {
         const { cart } = this.state;
         const check = cart.every(item => {
             return item.productName !== id
-
         })
         const success = () => {
             message.success('The product has been added to cart', 2);
@@ -73,11 +70,11 @@ class DataProvider extends Component<{}, State> {
     }
 
     removeProductfromCart = (id: string) => {
+        const { cart } = this.state;
 
-        const error = () => {
+        const popupMessage = () => {
             message.error('The product has been deleted', 2);
         };
-        const { cart } = this.state;
         cart.forEach((item, index) => {
             if (item.productName === id) {
                 cart.splice(index, 1)
@@ -85,25 +82,18 @@ class DataProvider extends Component<{}, State> {
         })
         this.setState({ cart: cart })
         this.getTotalPrice()
-        error();
+        popupMessage();
     }
 
-    decreaseCount = (id: string) => {
+    changeCount = (id: string, symbol: string) => {
         const { cart } = this.state;
         cart.forEach(item => {
             if (item.productName === id) {
-                item.count === 1 ? item.count = 1 : item.count -= 1;
-            }
-        })
-        this.setState({ cart: cart })
-        this.getTotalPrice()
-    }
-
-    increaseCount = (id: string) => {
-        const { cart } = this.state;
-        cart.forEach(item => {
-            if (item.productName === id) {
-                item.count += 1;
+                if(symbol === '-') {
+                    item.count === 1 ? item.count = 1 : item.count -= 1;
+                } else if (symbol === '+'){
+                    item.count += 1;
+                }
             }
         })
         this.setState({ cart: cart })
@@ -138,8 +128,7 @@ class DataProvider extends Component<{}, State> {
                 addToCart: this.addProductToCart,
                 removeProduct: this.removeProductfromCart,
                 total: this.state.total,
-                increase: this.increaseCount,
-                decrease: this.decreaseCount,
+                changeCount: this.changeCount,
                 getTotal: this.getTotalPrice,
                 emptyCart: this.emptyCart,
             }}>

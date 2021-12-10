@@ -55,12 +55,12 @@ class Cart extends Component<Props> {
                   <p style={{ color: "red" }}>{item.price * item.count}kr</p>
                   <div className="flex centerY centerX count-div">
                     <Button id="mobileBtn"
-                      onClick={() => this.context.decrease(item.productName)}>
+                      onClick={() => this.context.changeCount(item.productName, '-')}>
                       -
                     </Button>
                     <span style={{ margin: "0 .5rem" }}> {item.count}</span>
                     <Button id="mobileBtn"
-                      onClick={() => this.context.increase(item.productName)}>
+                      onClick={() => this.context.changeCount(item.productName, '+')}>
                       +
                     </Button>
                     <CloseOutlined
